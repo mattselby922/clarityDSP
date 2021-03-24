@@ -86,9 +86,6 @@ ClarityPlugin3AudioProcessorEditor::~ClarityPlugin3AudioProcessorEditor()
 //==============================================================================
 void ClarityPlugin3AudioProcessorEditor::paint(juce::Graphics& g)
 {
-    // (Our component is opaque, so we must completely fill the background with a solid colour)
-    //g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
-
     g.setColour(juce::Colours::white);
     g.setGradientFill(juce::ColourGradient(juce::Colours::lightcoral, 0, 0, juce::Colours::darkcyan, 1000, 1000, true));
     g.fillAll();
@@ -122,7 +119,7 @@ void ClarityPlugin3AudioProcessorEditor::resized()
     filters.alignContent = juce::FlexBox::AlignContent::flexEnd;
 
     juce::Array<juce::FlexItem> filtersArray;
-    filtersArray.add(juce::FlexItem(0, 0, muteButton));               //adding mute button to flexbox
+    filtersArray.add(juce::FlexItem(100, 0, muteButton));               //adding mute button to flexbox
     filtersArray.add(juce::FlexItem(200, 200, mGainControlSlider));     //adding gain knob
     filtersArray.add(juce::FlexItem(50, 50, gainLabel));                //adding gainLabel
     filtersArray.add(juce::FlexItem(125, 125, lowPass));                //adding lowPass filter knob
@@ -169,7 +166,7 @@ void ClarityPlugin3AudioProcessorEditor::buttonClicked(juce::Button* button)
     if (button == &muteButton)
     {
         //set gain to 0
-        /*juce::AudioParameterFloat* gainParameter = (juce::AudioParameterFloat*)params.getUnchecked(0);
-        *gainParameter = 0;*/
+        juce::AudioParameterFloat* gainParameter = (juce::AudioParameterFloat*)params.getUnchecked(0);
+        *gainParameter = 0;
     }
 }

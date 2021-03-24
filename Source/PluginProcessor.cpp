@@ -165,7 +165,7 @@ void ClarityPlugin3AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer
     //right channel
     auto* channelRight = buffer.getWritePointer(1);
 
-    // ..do something to the data...
+    //processing
     for (int sample = 0; sample < buffer.getNumSamples(); sample++)
     {
         // Smoothing (formula: x = x-z * (x-y) / x=smoothed value, y= target value, z= speed.
