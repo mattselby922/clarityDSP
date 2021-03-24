@@ -18,7 +18,6 @@ ClarityPlugin3AudioProcessorEditor::ClarityPlugin3AudioProcessorEditor(ClarityPl
     auto& params = processor.getParameters();
     juce::AudioParameterFloat* gainParameter = (juce::AudioParameterFloat*)params.getUnchecked(0);
 
-
     //creating gain Slider
     addAndMakeVisible(mGainControlSlider);
     mGainControlSlider.setSliderStyle(juce::Slider::RotaryVerticalDrag);
@@ -37,6 +36,7 @@ ClarityPlugin3AudioProcessorEditor::ClarityPlugin3AudioProcessorEditor(ClarityPl
 
     //creating mute button
     addAndMakeVisible(muteButton);
+    muteButton.setColour(juce::TextButton::buttonColourId, juce::Colour::fromRGB(101, 201, 134));
     muteButton.setButtonText("Mute");
     muteButton.addListener(this);
 
@@ -149,6 +149,7 @@ void ClarityPlugin3AudioProcessorEditor::resized()
 // Defining sliderValueChanged
 
 void ClarityPlugin3AudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
+//Function called whenever ANY SLIDER IS CHANGED. what the function does is determined by the if (slider == &whateverYourSliderIsNamed) statement
 {
     auto& params = processor.getParameters();
 
@@ -156,17 +157,67 @@ void ClarityPlugin3AudioProcessorEditor::sliderValueChanged(juce::Slider* slider
     {
         juce::AudioParameterFloat* gainParameter = (juce::AudioParameterFloat*)params.getUnchecked(0);
         *gainParameter = mGainControlSlider.getValue();
+
+        //sets mute button colour back to original if *gainParameter != 0
+        if (*gainParameter != 0)
+        {
+            muteButton.setColour(juce::TextButton::buttonColourId, juce::Colour::fromRGB(101, 201, 134));
+        }
+
     }
+
+    if (slider == &lowPass)
+    {
+        juce::AudioParameterFloat* lpParameter = (juce::AudioParameterFloat*)params.getUnchecked(0);
+        *lpParameter = lowPass.getValue();
+    }
+
+    if (slider == &highPass)
+    {
+
+    }
+
 }
 
 void ClarityPlugin3AudioProcessorEditor::buttonClicked(juce::Button* button)
+ //Function called whenever ANY BUTTON IS CLICKED. what the function does is determined by the if (button == &whateverYourButtonIsNamed) statement
 {
     auto& params = processor.getParameters();
+ 
+    juce::AudioParameterFloat* gainParameter = (juce::AudioParameterFloat*)params.getUnchecked(0);
 
     if (button == &muteButton)
     {
         //set gain to 0
         juce::AudioParameterFloat* gainParameter = (juce::AudioParameterFloat*)params.getUnchecked(0);
         *gainParameter = 0;
+       
+        if (*gainParameter == 0) {
+            muteButton.setColour(juce::TextButton::buttonColourId, juce::Colours::indianred);
+        }
+        
     }
 }
+
+/*void ClarityPlugin3AudioProcessorEditor::buttonClicked(juce::Button* button)
+//Function called whenever ANY BUTTON IS CLICKED. what the function does is determined by the if (button == &whateverYourButtonIsNamed) statement
+{
+    auto& params = processor.getParameters();
+    if (button == &muteButton)
+    {
+        juce::AudioParameterFloat* gainParameter = (juce::AudioParameterFloat*)params.getUnchecked(0);
+        float temp = *gainParameter;
+        if (*gainParameter != 0) {                
+            //set gain to 0
+            *gainParameter = 0;
+            muteButton.setColour(juce::TextButton::buttonColourId, juce::Colours::indianred);
+        }
+        else if (*gainParameter == 0)
+        {
+            *gainParameter = temp;
+            muteButton.setColour(juce::TextButton::buttonColourId, juce::Colours::indianred);
+        }
+    }
+
+}*/
+

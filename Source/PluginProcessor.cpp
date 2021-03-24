@@ -14,7 +14,7 @@ ClarityPlugin3AudioProcessor::ClarityPlugin3AudioProcessor()
     )
 #endif
 {
-    //Setiing the max min and default of the gain
+    //Setting the max min and default of the gain
     addParameter(mGainParameter = new juce::AudioParameterFloat("gainID",
         "Gain",
         0.0f,
@@ -24,6 +24,7 @@ ClarityPlugin3AudioProcessor::ClarityPlugin3AudioProcessor()
 
     mGainSmoothed = mGainParameter->get();
 }
+
 
 ClarityPlugin3AudioProcessor::~ClarityPlugin3AudioProcessor()
 {

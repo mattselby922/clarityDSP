@@ -36,7 +36,7 @@ private:
     juce::Label gainLabel;
 
     SimpleFFT FFT;
-    AnalyserComponent SA;
+    //AnalyserComponent SA;
 
     // Filters
     juce::Slider lowPass;
