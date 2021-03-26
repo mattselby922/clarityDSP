@@ -46,11 +46,30 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
+    void updateFilter();
+
 private:
+
     // Defining AudioProcessorFloat of Gain
 
     juce::AudioParameterFloat* mGainParameter;
     float mGainSmoothed;
+
+    juce::AudioParameterFloat* lowPassFrequencyParameter;
+    juce::AudioParameterFloat* highPassFrequencyParameter;
+
+//    juce::dsp::ProcessorChain<juce::dsp::IIR::Filter <float>, juce::dsp::IIR::Coefficients <float>> lowPassFilter;
+//    juce::dsp::ProcessorChain<juce::dsp::IIR::Filter <float>, juce::dsp::IIR::Coefficients <float>> highPassFilter;
+
+
+    //intitializing dsp::ProcessSpec for filters
+    double lastSampleRate; 
+
+    //duplicated to analyze in stereo
+    juce::dsp::ProcessorDuplicator<juce::dsp::IIR::Filter <float>, juce::dsp::IIR::Coefficients <float>> lowPassFilter;
+    juce::dsp::ProcessorDuplicator<juce::dsp::IIR::Filter <float>, juce::dsp::IIR::Coefficients <float>> highPassFilter;
+
+
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ClarityPlugin3AudioProcessor)
 };

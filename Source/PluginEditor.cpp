@@ -17,6 +17,8 @@ ClarityPlugin3AudioProcessorEditor::ClarityPlugin3AudioProcessorEditor(ClarityPl
     // Accessing the parameter list
     auto& params = processor.getParameters();
     juce::AudioParameterFloat* gainParameter = (juce::AudioParameterFloat*)params.getUnchecked(0);
+    juce::AudioParameterFloat* lowPassFrequencyParameter = (juce::AudioParameterFloat*)params.getUnchecked(1);
+    juce::AudioParameterFloat* highPassFrequencyParameter = (juce::AudioParameterFloat*)params.getUnchecked(2);
 
     //creating gain Slider
     addAndMakeVisible(mGainControlSlider);
@@ -58,6 +60,8 @@ ClarityPlugin3AudioProcessorEditor::ClarityPlugin3AudioProcessorEditor(ClarityPl
     //lowPass knob
     addAndMakeVisible(lowPass);
     lowPass.setSliderStyle(juce::Slider::RotaryVerticalDrag);
+    lowPass.setRange(lowPassFrequencyParameter->range.start, lowPassFrequencyParameter->range.end);
+    lowPass.setValue(*lowPassFrequencyParameter);
     lowPass.setColour(juce::Slider::thumbColourId, juce::Colour::fromRGB(96, 45, 50));
     lowPass.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 50);
     lowPass.addListener(this);
@@ -71,6 +75,8 @@ ClarityPlugin3AudioProcessorEditor::ClarityPlugin3AudioProcessorEditor(ClarityPl
     //highPassKnob
     addAndMakeVisible(highPass);
     highPass.setSliderStyle(juce::Slider::RotaryVerticalDrag);
+    highPass.setRange(highPassFrequencyParameter->range.start, highPassFrequencyParameter->range.end);
+    highPass.setValue(*highPassFrequencyParameter);
     highPass.setColour(juce::Slider::thumbColourId, juce::Colour::fromRGB(96, 45, 50));
     highPass.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 50);
     highPass.addListener(this);
