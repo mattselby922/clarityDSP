@@ -41,8 +41,10 @@ private:
     // Filters
     juce::Slider lowPass;
     juce::Label lowPassLabel;
+    juce::ScopedPointer<juce::AudioProcessorValueTreeState::SliderAttachment> lowPassFrequency;
     juce::Slider highPass;
     juce::Label highPassLabel;
+    juce::ScopedPointer<juce::AudioProcessorValueTreeState::SliderAttachment> highPassFrequency;
 
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.

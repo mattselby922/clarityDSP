@@ -11,8 +11,9 @@ ClarityPlugin3AudioProcessor::ClarityPlugin3AudioProcessor()
 #endif
         .withOutput("Output", juce::AudioChannelSet::stereo(), true)
 #endif
-    ),  lowPassFilter(juce::dsp::IIR::Coefficients<float>::makeLowPass(48000,20000.0f)),
-        highPassFilter(juce::dsp::IIR::Coefficients<float>::makeHighPass(48000, 40.0f))
+    ),  tree(*this, nullptr),
+        lowPassFilter(juce::dsp::IIR::Coefficients<float>::makeLowPass(48000,20000.0f)),
+        highPassFilter(juce::dsp::IIR::Coefficients<float>::makeHighPass(48000, 20.0f))
 #endif
 { 
     //Setting the max min and default of the gain
@@ -26,10 +27,23 @@ ClarityPlugin3AudioProcessor::ClarityPlugin3AudioProcessor()
     mGainSmoothed = mGainParameter->get();
 
     //Parameters for Hi/Lo Pass Filters
-    addParameter(lowPassFrequencyParameter = 
-        new juce::AudioParameterFloat("lowPassFrequency", "LowPassFrequency", juce::NormalisableRange<float>(20.0f, 20000.0f), 20000.0f));
-    addParameter(highPassFrequencyParameter = 
-        new juce::AudioParameterFloat("highPassFrequency", "HighPassFrequency", juce::NormalisableRange<float>(20.0f, 20000.0f), 20.0f));
+
+//    juce::NormalisableRange<float> lowPassRange(20.0f, 20000.0f);
+//    juce::NormalisableRange<float> highPassRange(20.0f, 20000.0f);
+
+//    tree.createAndAddParameter("cutoff", "Cutoff", "cutoff", lowPassRange, 100.0f, nullptr, nullptr);
+//    tree.createAndAddParameter("resonance", "Resonance", "resonance", highPassRange, 0.1f, nullptr, nullptr);
+
+    tree.createAndAddParameter("lowPassFrequency", "LowPassFrequency", "lowPassFrequency", 
+        juce::NormalisableRange<float>(20.0f, 20000.0f), 20000.0f, nullptr, nullptr);
+    tree.createAndAddParameter("highPassFrequency", "HighPassFrequency", "highPassFrequency", 
+        juce::NormalisableRange<float>(20.0f, 20000.0f), 20.0f, nullptr, nullptr);
+
+
+//    addParameter(lowPassFrequencyParameter = 
+//        new juce::AudioParameterFloat("lowPassFrequency", "LowPassFrequency", juce::NormalisableRange<float>(20.0f, 20000.0f), 20000.0f));
+//    addParameter(highPassFrequencyParameter = 
+//        new juce::AudioParameterFloat("highPassFrequency", "HighPassFrequency", juce::NormalisableRange<float>(20.0f, 20000.0f), 20.0f));
 }
 
 
@@ -191,6 +205,9 @@ void ClarityPlugin3AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer
     //processing
     for (int sample = 0; sample < buffer.getNumSamples(); sample++)
     {
+        
+        //buffer.clear(sample, 0, buffer.getNumSamples());
+        
         // Smoothing (formula: x = x-z * (x-y) / x=smoothed value, y= target value, z= speed.
 
         mGainSmoothed = mGainSmoothed - 0.001 * (mGainSmoothed - mGainParameter->get());
@@ -250,8 +267,10 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 
 void ClarityPlugin3AudioProcessor::updateFilter()
 {
-    float lowfreq = lowPassFrequencyParameter->get();
-    float highfreq = highPassFrequencyParameter->get();
+    float lowfreq = *tree.getRawParameterValue("lowPassFrequency");
+        //lowPassFrequencyParameter->get();
+    float highfreq = *tree.getRawParameterValue("highPassFrequency");
+        //highPassFrequencyParameter->get();
     
     *lowPassFilter.state = *juce::dsp::IIR::Coefficients <float>::makeLowPass(lastSampleRate, lowfreq);
     *highPassFilter.state = *juce::dsp::IIR::Coefficients <float>::makeHighPass(lastSampleRate, highfreq);
