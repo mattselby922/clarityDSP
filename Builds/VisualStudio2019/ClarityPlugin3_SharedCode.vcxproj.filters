@@ -2622,6 +2622,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\IIRFilter.h">
+      <Filter>ClarityPlugin3\Source</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\SimpleFFT.h">
       <Filter>ClarityPlugin3\Source</Filter>
     </ClInclude>

@@ -11,7 +11,9 @@ ClarityPlugin3AudioProcessor::ClarityPlugin3AudioProcessor()
 #endif
         .withOutput("Output", juce::AudioChannelSet::stereo(), true)
 #endif
-    )
+    ), tree(*this, nullptr),
+    lowPassFilter(juce::dsp::IIR::Coefficients<float>::makeLowPass(48000, 20000.0f)),
+    highPassFilter(juce::dsp::IIR::Coefficients<float>::makeHighPass(48000, 20.0f))
 #endif
 {
     //Setting the max min and default of the gain
@@ -19,10 +21,15 @@ ClarityPlugin3AudioProcessor::ClarityPlugin3AudioProcessor()
         "Gain",
         0.0f,
         2.0f,
-        0.0));
+        1.0));
     // Smoothing the gain, getting rid of pops
-
     mGainSmoothed = mGainParameter->get();
+
+    //Parameters for Hi/Lo Pass Filters
+    tree.createAndAddParameter("lowPassFrequency", "LowPassFrequency", "lowPassFrequency",
+        juce::NormalisableRange<float>(20.0f, 20000.0f), 20000.0f, nullptr, nullptr);
+    tree.createAndAddParameter("highPassFrequency", "HighPassFrequency", "highPassFrequency",
+        juce::NormalisableRange<float>(20.0f, 20000.0f), 20.0f, nullptr, nullptr);
 }
 
 
@@ -97,6 +104,18 @@ void ClarityPlugin3AudioProcessor::prepareToPlay(double sampleRate, int samplesP
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
+    //Russ edit - intitializing ability to use dsp module
+    //dsp ProcessSpec class
+    lastSampleRate = sampleRate;
+    juce::dsp::ProcessSpec spec;
+    spec.sampleRate = sampleRate;
+    spec.maximumBlockSize = samplesPerBlock;
+    spec.numChannels = getTotalNumOutputChannels();
+    
+    lowPassFilter.prepare(spec);
+    lowPassFilter.reset();
+    highPassFilter.prepare(spec);
+    highPassFilter.reset();
 }
 
 void ClarityPlugin3AudioProcessor::releaseResources()
@@ -169,8 +188,7 @@ void ClarityPlugin3AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer
     //processing
     for (int sample = 0; sample < buffer.getNumSamples(); sample++)
     {
-        // Smoothing (formula: x = x-z * (x-y) / x=smoothed value, y= target value, z= speed.
-
+        // Gain Smoothing (formula: x = x-z * (x-y) / x=smoothed value, y= target value, z= speed.
         mGainSmoothed = mGainSmoothed - 0.001 * (mGainSmoothed - mGainParameter->get());
 
         channelLeft[sample] *= mGainSmoothed;
@@ -178,7 +196,11 @@ void ClarityPlugin3AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer
 
         DBG(*mGainParameter);
     }
-
+    //Low Pass Filter
+    juce::dsp::AudioBlock<float> block(buffer);
+    updateFilter();
+    lowPassFilter.process(juce::dsp::ProcessContextReplacing <float>(block));
+    highPassFilter.process(juce::dsp::ProcessContextReplacing <float>(block));
 
     //}   dont touch! outer loop closing bracket (Liam)
 }
@@ -218,4 +240,13 @@ void ClarityPlugin3AudioProcessor::setStateInformation(const void* data, int siz
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new ClarityPlugin3AudioProcessor();
+}
+
+void ClarityPlugin3AudioProcessor::updateFilter()
+{
+    float lowfreq = *tree.getRawParameterValue("lowPassFrequency");
+    float highfreq = *tree.getRawParameterValue("highPassFrequency");
+
+    *lowPassFilter.state = *juce::dsp::IIR::Coefficients <float>::makeLowPass(lastSampleRate, lowfreq);
+    *highPassFilter.state = *juce::dsp::IIR::Coefficients <float>::makeHighPass(lastSampleRate, highfreq);
 }

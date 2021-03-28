@@ -3,83 +3,29 @@
 
 //==============================================================================
 ClarityPlugin3AudioProcessorEditor::ClarityPlugin3AudioProcessorEditor(ClarityPlugin3AudioProcessor& p)
-    : AudioProcessorEditor(&p), audioProcessor(p)
+    : AudioProcessorEditor(&p),
+    audioProcessor(p),
+    lowPassFrequency(new juce::AudioProcessorValueTreeState::SliderAttachment(audioProcessor.tree, "lowPassFrequency", lowPass)),
+    highPassFrequency(new juce::AudioProcessorValueTreeState::SliderAttachment(audioProcessor.tree, "highPassFrequency", highPass))
 {
     setSize(800, 650);
 
-    //displaying project name
-    addAndMakeVisible(projectName);
-    projectName.setFont(juce::Font(30.0f, juce::Font::bold));
-    projectName.setText("CLARITY", juce::dontSendNotification);
-    projectName.setColour(juce::Label::textColourId, juce::Colours::black);
-    projectName.setJustificationType(juce::Justification::left);
+    initialize_projectName();
+    initialize_muteButton();
+    initialize_mGainControlSlider();
+    initialize_gainLabel();
+    initialize_FFT();
 
-    // Accessing the parameter list
-    auto& params = processor.getParameters();
-    juce::AudioParameterFloat* gainParameter = (juce::AudioParameterFloat*)params.getUnchecked(0);
 
-    //creating gain Slider
-    addAndMakeVisible(mGainControlSlider);
-    mGainControlSlider.setSliderStyle(juce::Slider::RotaryVerticalDrag);
-    mGainControlSlider.setRange(gainParameter->range.start, gainParameter->range.end);
-    mGainControlSlider.setValue(*gainParameter);
-    mGainControlSlider.setColour(juce::Slider::thumbColourId, juce::Colour::fromRGB(96, 45, 50));
-    mGainControlSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 50);
-    mGainControlSlider.addListener(this);
-
-    //gainLabel
-    addAndMakeVisible(gainLabel);
-    gainLabel.setFont(juce::Font(16.0f, juce::Font::bold));
-    gainLabel.attachToComponent(&mGainControlSlider, false);
-    gainLabel.setJustificationType(juce::Justification::centred);
-    gainLabel.setText("Gain", juce::dontSendNotification);
-
-    //creating mute button
-    addAndMakeVisible(muteButton);
-    muteButton.setColour(juce::TextButton::buttonColourId, juce::Colour::fromRGB(101, 201, 134));
-    muteButton.setButtonText("Mute");
-    muteButton.addListener(this);
-
-    //displaying FFT
-    addAndMakeVisible(FFT);
-    //FFT.setBounds();
-
-    //displaying Spectrum Analyzer
-    //addAndMakeVisible(SA);
-
- //Filters
-
-    //lowPassLabel
-    addAndMakeVisible(lowPassLabel);
-    lowPassLabel.setFont(juce::Font(16.0f, juce::Font::bold));
-    lowPassLabel.attachToComponent(&lowPass, false);
-    lowPassLabel.setJustificationType(juce::Justification::centred);
-    lowPassLabel.setText("Low-Pass Filter", juce::dontSendNotification);
-    //lowPass knob
-    addAndMakeVisible(lowPass);
-    lowPass.setSliderStyle(juce::Slider::RotaryVerticalDrag);
-    lowPass.setColour(juce::Slider::thumbColourId, juce::Colour::fromRGB(96, 45, 50));
-    lowPass.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 50);
-    lowPass.addListener(this);
-    
-    //highPassLabel
-    addAndMakeVisible(highPassLabel);
-    highPassLabel.setFont(juce::Font(16.0f, juce::Font::bold));
-    highPassLabel.attachToComponent(&highPass, false);
-    highPassLabel.setJustificationType(juce::Justification::centred);
-    highPassLabel.setText("High-Pass Filter", juce::dontSendNotification);
-    //highPassKnob
-    addAndMakeVisible(highPass);
-    highPass.setSliderStyle(juce::Slider::RotaryVerticalDrag);
-    highPass.setColour(juce::Slider::thumbColourId, juce::Colour::fromRGB(96, 45, 50));
-    highPass.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 50);
-    highPass.addListener(this);
+    // Filters
+    initialize_lowPassLabel();
+    initialize_lowPass(); //low pass knob
+    initialize_highPassLabel();
+    initialize_highPass();
 }
 
 ClarityPlugin3AudioProcessorEditor::~ClarityPlugin3AudioProcessorEditor()
 {
-    muteButton.removeListener(this);
-    mGainControlSlider.removeListener(this);
 
 }
 
@@ -90,14 +36,43 @@ void ClarityPlugin3AudioProcessorEditor::paint(juce::Graphics& g)
     g.setGradientFill(juce::ColourGradient(juce::Colours::lightcoral, 0, 0, juce::Colours::darkcyan, 1000, 1000, true));
     g.fillAll();
     g.setFont(15.0f);
+
 }
 
 void ClarityPlugin3AudioProcessorEditor::resized()
 {
-    const int border = 20;
-
     juce::Rectangle<int> area = getLocalBounds();
 
+    // Add Padding
+    auto applicationBorderPadding = 15;
+    area.removeFromTop(applicationBorderPadding);
+    area.removeFromLeft(applicationBorderPadding);
+    area.removeFromRight(applicationBorderPadding);
+    area.removeFromBottom(applicationBorderPadding);
+
+    // projectName Label
+    projectName.setBounds(area.removeFromTop(area.getHeight() / 20));
+
+    // SimpleFFT (i.e., Spectrogram)
+    FFT.setBounds(area.removeFromTop(area.getHeight() / 3));
+
+    area.removeFromTop(100); // Temporary Spacing
+
+    // muteButton
+    //muteButton.setBounds(area.removeFromLeft(area.getWidth() / 5));
+    auto buttonArea = area.removeFromLeft(area.getWidth() / 4);
+    muteButton.setBounds(buttonArea.removeFromBottom(buttonArea.getHeight() / 2));
+
+    // mGainControlSlider
+    mGainControlSlider.setBounds(area.removeFromLeft(area.getWidth() / 3));
+
+    // lowPass
+    lowPass.setBounds(area.removeFromLeft(area.getWidth() / 2));
+
+    // highPass
+    highPass.setBounds(area);
+
+    /*
     //Positioning projectName
     projectName.setBounds(area.removeFromTop(area.getHeight() / 20));
 
@@ -108,7 +83,7 @@ void ClarityPlugin3AudioProcessorEditor::resized()
     EQ.alignContent = juce::FlexBox::AlignContent::flexEnd;
 
     juce::Array<juce::FlexItem> EQArray;
-    //EQArray.add(juce::FlexItem(200,200, ));   //adding 
+    //EQArray.add(juce::FlexItem(200,200, ));   //adding
     EQ.items = EQArray;
     EQ.performLayout(getLocalBounds().toFloat());
 
@@ -129,95 +104,152 @@ void ClarityPlugin3AudioProcessorEditor::resized()
     filters.performLayout(getLocalBounds().toFloat());
 
     FFT.setBounds(area.removeFromTop(100));
-
-    //flexbox containing visualizers
-    /*juce::FlexBox visualizers;
-    visualizers.flexDirection = juce::FlexBox::Direction::row;
-    visualizers.flexWrap = juce::FlexBox::Wrap::wrap;
-    visualizers.justifyContent = juce::FlexBox::JustifyContent::center;
-    visualizers.alignContent = juce::FlexBox::AlignContent::center;
-
-    //Adding flexitems to juce Array
-    juce::Array<juce::FlexItem> visualizersArray;
-    visualizersArray.add(juce::FlexItem(150, 100, FFT));   //adding spectrogram to flexbox
-    visualizersArray.add(juce::FlexItem(150, 100, SA));    //adding spectrum analyzer to flexbox
-
-    visualizers.items = visualizersArray;
-    visualizers.performLayout(getLocalBounds().toFloat());*/
+    */
 }
 
-// Defining sliderValueChanged
 
-void ClarityPlugin3AudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
-//Function called whenever ANY SLIDER IS CHANGED. what the function does is determined by the if (slider == &whateverYourSliderIsNamed) statement
+
+void ClarityPlugin3AudioProcessorEditor::muteButtonClicked()
 {
     auto& params = processor.getParameters();
 
-    if (slider == &mGainControlSlider)
-    {
-        juce::AudioParameterFloat* gainParameter = (juce::AudioParameterFloat*)params.getUnchecked(0);
-        *gainParameter = mGainControlSlider.getValue();
-
-        //sets mute button colour back to original if *gainParameter != 0
-        if (*gainParameter != 0)
-        {
-            muteButton.setColour(juce::TextButton::buttonColourId, juce::Colour::fromRGB(101, 201, 134));
-        }
-
-    }
-
-    if (slider == &lowPass)
-    {
-        juce::AudioParameterFloat* lpParameter = (juce::AudioParameterFloat*)params.getUnchecked(0);
-        *lpParameter = lowPass.getValue();
-    }
-
-    if (slider == &highPass)
-    {
-
-    }
-
-}
-
-void ClarityPlugin3AudioProcessorEditor::buttonClicked(juce::Button* button)
- //Function called whenever ANY BUTTON IS CLICKED. what the function does is determined by the if (button == &whateverYourButtonIsNamed) statement
-{
-    auto& params = processor.getParameters();
- 
     juce::AudioParameterFloat* gainParameter = (juce::AudioParameterFloat*)params.getUnchecked(0);
 
-    if (button == &muteButton)
-    {
-        //set gain to 0
-        juce::AudioParameterFloat* gainParameter = (juce::AudioParameterFloat*)params.getUnchecked(0);
+    //if user mutes, make sure that unmute function does not get called
+    int count = 0;
+
+    //function to mute
+    if (*gainParameter != 0) {
         *gainParameter = 0;
-       
-        if (*gainParameter == 0) {
-            muteButton.setColour(juce::TextButton::buttonColourId, juce::Colours::indianred);
-        }
-        
+        muteButton.setButtonText("Unmute");
+        muteButton.setColour(juce::TextButton::buttonColourId, juce::Colours::indianred);
+        addAndMakeVisible(muteButton);
+
+
+        //allows program to avoid unmute function being called
+        count++;
+    }
+
+    //function to unmute
+    if (*gainParameter == 0 && count == 0)
+    {
+        *gainParameter = mGainControlSlider.getValue();
+        muteButton.setButtonText("Mute");
+        addAndMakeVisible(muteButton);
+        muteButton.setColour(juce::TextButton::buttonColourId, juce::Colour::fromRGB(101, 201, 134));
     }
 }
 
-/*void ClarityPlugin3AudioProcessorEditor::buttonClicked(juce::Button* button)
-//Function called whenever ANY BUTTON IS CLICKED. what the function does is determined by the if (button == &whateverYourButtonIsNamed) statement
+void ClarityPlugin3AudioProcessorEditor::highPass_SliderValueChanged()
+{
+
+}
+
+void ClarityPlugin3AudioProcessorEditor::lowPass_SliderValueChanged()
 {
     auto& params = processor.getParameters();
-    if (button == &muteButton)
-    {
-        juce::AudioParameterFloat* gainParameter = (juce::AudioParameterFloat*)params.getUnchecked(0);
-        float temp = *gainParameter;
-        if (*gainParameter != 0) {                
-            //set gain to 0
-            *gainParameter = 0;
-            muteButton.setColour(juce::TextButton::buttonColourId, juce::Colours::indianred);
-        }
-        else if (*gainParameter == 0)
-        {
-            *gainParameter = temp;
-            muteButton.setColour(juce::TextButton::buttonColourId, juce::Colours::indianred);
-        }
-    }
+    juce::AudioParameterFloat* lpParameter = (juce::AudioParameterFloat*)params.getUnchecked(0);
+    *lpParameter = lowPass.getValue();
+}
 
-}*/
+void ClarityPlugin3AudioProcessorEditor::mGainControlSlider_SliderValueChanged()
+{
+    auto& params = processor.getParameters();
+    juce::AudioParameterFloat* gainParameter = (juce::AudioParameterFloat*)params.getUnchecked(0);
+    *gainParameter = mGainControlSlider.getValue();
 
+    //unmutes if the user moves the rotary slider
+    muteButton.setButtonText("Mute");
+    addAndMakeVisible(muteButton);
+    muteButton.setColour(juce::TextButton::buttonColourId, juce::Colour::fromRGB(101, 201, 134));
+
+}
+
+void ClarityPlugin3AudioProcessorEditor::initialize_projectName()
+{
+    addAndMakeVisible(projectName);
+    projectName.setFont(juce::Font(30.0f, juce::Font::bold));
+    projectName.setText("CLARITY", juce::dontSendNotification);
+    projectName.setColour(juce::Label::textColourId, juce::Colours::black);
+    projectName.setJustificationType(juce::Justification::centred);
+}
+
+void ClarityPlugin3AudioProcessorEditor::initialize_muteButton()
+{
+    addAndMakeVisible(muteButton);
+    muteButton.setColour(juce::TextButton::buttonColourId, juce::Colour::fromRGB(101, 201, 134));
+    muteButton.setButtonText("Mute");
+    muteButton.onClick = [this] { muteButtonClicked(); };
+}
+
+void ClarityPlugin3AudioProcessorEditor::initialize_mGainControlSlider()
+{
+    auto& params = processor.getParameters();
+    juce::AudioParameterFloat* gainParameter = (juce::AudioParameterFloat*)params.getUnchecked(0);
+    addAndMakeVisible(mGainControlSlider);
+    mGainControlSlider.setSliderStyle(juce::Slider::LinearBarVertical);
+    mGainControlSlider.setRange(gainParameter->range.start, gainParameter->range.end);
+    mGainControlSlider.setValue(*gainParameter);
+    mGainControlSlider.setColour(juce::Slider::thumbColourId, juce::Colour::fromRGB(96, 45, 50));
+    mGainControlSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 50);
+    mGainControlSlider.onValueChange = [this] { mGainControlSlider_SliderValueChanged(); };
+    getLookAndFeel().setColour(juce::Slider::backgroundColourId, juce::Colours::black);
+}
+
+void ClarityPlugin3AudioProcessorEditor::initialize_gainLabel()
+{
+    addAndMakeVisible(gainLabel);
+    getLookAndFeel().setColour(juce::Slider::textBoxBackgroundColourId, juce::Colours::black);
+    gainLabel.setFont(juce::Font(16.0f, juce::Font::bold));
+    gainLabel.attachToComponent(&mGainControlSlider, false);
+    gainLabel.setJustificationType(juce::Justification::centred);
+    gainLabel.setText("Gain", juce::dontSendNotification);
+}
+
+void ClarityPlugin3AudioProcessorEditor::initialize_FFT()
+{
+    addAndMakeVisible(FFT);
+}
+
+void ClarityPlugin3AudioProcessorEditor::initialize_lowPassLabel()
+{
+    addAndMakeVisible(lowPassLabel);
+    lowPassLabel.setFont(juce::Font(16.0f, juce::Font::bold));
+    lowPassLabel.attachToComponent(&lowPass, false);
+    lowPassLabel.setJustificationType(juce::Justification::centred);
+    lowPassLabel.setText("Low-Pass Filter", juce::dontSendNotification);
+}
+
+void ClarityPlugin3AudioProcessorEditor::initialize_lowPass()
+{
+    //lowPass knob
+    getLookAndFeel().setColour(juce::Slider::rotarySliderFillColourId, juce::Colours::black);
+    addAndMakeVisible(&lowPass);
+    lowPass.setSliderStyle(juce::Slider::RotaryVerticalDrag);
+    lowPass.setRange(20.0f, 20000.0f);
+    lowPass.setValue(20000.0f);
+    lowPass.setColour(juce::Slider::thumbColourId, juce::Colour::fromRGB(96, 45, 50));
+    lowPass.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 50);
+    lowPass.onValueChange = [this] { lowPass_SliderValueChanged(); };
+}
+
+void ClarityPlugin3AudioProcessorEditor::initialize_highPassLabel()
+{
+    addAndMakeVisible(highPassLabel);
+    highPassLabel.setFont(juce::Font(16.0f, juce::Font::bold));
+    highPassLabel.attachToComponent(&highPass, false);
+    highPassLabel.setJustificationType(juce::Justification::centred);
+    highPassLabel.setText("High-Pass Filter", juce::dontSendNotification);
+}
+
+void ClarityPlugin3AudioProcessorEditor::initialize_highPass()
+{
+    //highPassKnob
+    addAndMakeVisible(&highPass);
+    highPass.setSliderStyle(juce::Slider::RotaryVerticalDrag);
+    highPass.setRange(20.0f, 20000.0f);
+    highPass.setValue(20.0f);
+    highPass.setColour(juce::Slider::thumbColourId, juce::Colour::fromRGB(96, 45, 50));
+    highPass.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 50);
+    highPass.onValueChange = [this] { highPass_SliderValueChanged(); };
+}
