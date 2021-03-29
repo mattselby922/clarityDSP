@@ -65,6 +65,7 @@ void ClarityPlugin3AudioProcessorEditor::resized()
     //muteButton.setBounds(area.removeFromLeft(area.getWidth() / 5));
     auto buttonArea = area.removeFromLeft(area.getWidth() / 4);
     muteButton.setBounds(buttonArea.removeFromBottom(buttonArea.getHeight() / 2));
+    theDeviceManager.setBounds(buttonArea);
 
     // mGainControlSlider
     mGainControlSlider.setBounds(area.removeFromLeft(area.getWidth() / 3));
@@ -196,7 +197,7 @@ void ClarityPlugin3AudioProcessorEditor::initialize_mGainControlSlider()
     mGainControlSlider.setColour(juce::Slider::thumbColourId, juce::Colour::fromRGB(96, 45, 50));
     mGainControlSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 50);
     mGainControlSlider.onValueChange = [this] { mGainControlSlider_SliderValueChanged(); };
-    getLookAndFeel().setColour(juce::Slider::backgroundColourId, juce::Colours::black);
+    
 }
 
 void ClarityPlugin3AudioProcessorEditor::initialize_gainLabel()
