@@ -22,6 +22,9 @@ ClarityPlugin3AudioProcessorEditor::ClarityPlugin3AudioProcessorEditor(ClarityPl
     initialize_lowPass(); //low pass knob
     initialize_highPassLabel();
     initialize_highPass();
+    
+    // Temp Device Manager Initialization
+    addAndMakeVisible(theDeviceManager);
 }
 
 ClarityPlugin3AudioProcessorEditor::~ClarityPlugin3AudioProcessorEditor()

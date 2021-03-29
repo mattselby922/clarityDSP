@@ -4,7 +4,7 @@
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="fahm1L" name="ClarityPlugin3">
     <GROUP id="{3B0E23F2-B3F4-A335-A84C-F146A55BDA2A}" name="Source">
-      <FILE id="pwDfth" name="IIRFilter.h" compile="0" resource="0" file="Source/IIRFilter.h"/>
+      <FILE id="dI6Xeh" name="DeviceManager.h" compile="0" resource="0" file="Source/DeviceManager.h"/>
       <FILE id="DJ6lV4" name="SimpleFFT.h" compile="0" resource="0" file="Source/SimpleFFT.h"/>
       <FILE id="bOc8ob" name="AnalyserComponent.h" compile="0" resource="0"
             file="Source/AnalyserComponent.h"/>

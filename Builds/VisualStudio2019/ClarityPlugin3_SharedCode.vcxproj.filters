@@ -2622,7 +2622,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\IIRFilter.h">
+    <ClInclude Include="..\..\Source\DeviceManager.h">
       <Filter>ClarityPlugin3\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\SimpleFFT.h">

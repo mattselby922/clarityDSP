@@ -2155,7 +2155,7 @@
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_gui_extra.cpp"/>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\IIRFilter.h"/>
+    <ClInclude Include="..\..\Source\DeviceManager.h"/>
     <ClInclude Include="..\..\Source\SimpleFFT.h"/>
     <ClInclude Include="..\..\Source\AnalyserComponent.h"/>
     <ClInclude Include="..\..\Source\PluginProcessor.h"/>
