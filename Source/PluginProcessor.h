@@ -48,12 +48,17 @@ public:
 
     void updateFilter();
 
+
+
     juce::AudioProcessorValueTreeState tree;
 
 private:
     // Defining AudioProcessorFloat of Gain
     juce::AudioParameterFloat* mGainParameter;
     float mGainSmoothed;
+
+    // Defining AudioProcessorFloat of compressor
+    juce::AudioParameterFloat* compressorParameter;
 
     // Defining AudioProcessorFloat for Filters
     juce::AudioParameterFloat* lowPassFrequencyParameter;

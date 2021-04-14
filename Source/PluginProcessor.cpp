@@ -25,11 +25,24 @@ ClarityPlugin3AudioProcessor::ClarityPlugin3AudioProcessor()
     // Smoothing the gain, getting rid of pops
     mGainSmoothed = mGainParameter->get();
 
+
+    //Setting parameters for compressor
+    /*addParameter(compressorParameter = new juce::AudioParameterFloat("compressorID",
+        "Compressor",
+        0.0f,
+        100.0f,
+        0.0));
+
+        */
+
     //Parameters for Hi/Lo Pass Filters
     tree.createAndAddParameter("lowPassFrequency", "LowPassFrequency", "lowPassFrequency",
         juce::NormalisableRange<float>(20.0f, 20000.0f), 20000.0f, nullptr, nullptr);
     tree.createAndAddParameter("highPassFrequency", "HighPassFrequency", "highPassFrequency",
         juce::NormalisableRange<float>(20.0f, 20000.0f), 20.0f, nullptr, nullptr);
+
+    tree.createAndAddParameter("compressorId", "compressor", "compressor",
+        juce::NormalisableRange<float>(0.0f, 100.0f), 20.0f, nullptr, nullptr);
 }
 
 
@@ -116,6 +129,9 @@ void ClarityPlugin3AudioProcessor::prepareToPlay(double sampleRate, int samplesP
     lowPassFilter.reset();
     highPassFilter.prepare(spec);
     highPassFilter.reset();
+
+    //compressor.prepare(spec);
+    //compressor.reset();
 }
 
 void ClarityPlugin3AudioProcessor::releaseResources()
@@ -195,14 +211,66 @@ void ClarityPlugin3AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer
         channelRight[sample] *= mGainSmoothed;
 
         DBG(*mGainParameter);
+
+        /* Clarity IIR Filter
+
+       //Stability conditions; Infinite Impulse Response filters must adhere to these
+       if(gain >= 1)
+       {
+           gain = 0.999;
+       }
+       else if(gain <= -1)
+       {
+           gain = -0.999;
+       }
+       
+       //Difference equation
+
+       need to replace y[] and x[] with correct variables
+       y[sample] = x[sample] + (g * y[sample - 1]
+       
+
+
+       channelLeft[sample] *= ;
+       channelRight[sample] *= ;
+
+
+
+   */
+   /*Least Mean Square Algorithm
+
+      1: Get input (Audio Buffer Sample)
+
+      2: Determine desired signal
+
+      3: Convolve input and desired signal+
+
+      4: Calculate adaptive filter ouput 'y'
+
+      5: Calculate error signal
+
+      6: Update each LMS filter weights
+
+      7: Repeat for next sample
+
+
+
+      */
+        
     }
     //Low Pass Filter
     juce::dsp::AudioBlock<float> block(buffer);
     updateFilter();
     lowPassFilter.process(juce::dsp::ProcessContextReplacing <float>(block));
     highPassFilter.process(juce::dsp::ProcessContextReplacing <float>(block));
+    //compressor.process(juce::dsp::ProcessContextReplacing<float>(block));
 
     //}   dont touch! outer loop closing bracket (Liam)
+
+   
+
+
+   
 }
 
 //==============================================================================
@@ -249,4 +317,6 @@ void ClarityPlugin3AudioProcessor::updateFilter()
 
     *lowPassFilter.state = *juce::dsp::IIR::Coefficients <float>::makeLowPass(lastSampleRate, lowfreq);
     *highPassFilter.state = *juce::dsp::IIR::Coefficients <float>::makeHighPass(lastSampleRate, highfreq);
+    //*compressor.state = *juce::dsp::Compressor<float>::Compressor(lastSampleRate, compress);
 }
+

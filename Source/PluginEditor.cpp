@@ -14,8 +14,11 @@ ClarityPlugin3AudioProcessorEditor::ClarityPlugin3AudioProcessorEditor(ClarityPl
     initialize_muteButton();
     initialize_mGainControlSlider();
     initialize_gainLabel();
-    initialize_FFT();
 
+    initialize_compressorSlider();
+    initialize_compressorLabel();
+
+    initialize_FFT();
 
     // Filters
     initialize_lowPassLabel();
@@ -39,7 +42,6 @@ void ClarityPlugin3AudioProcessorEditor::paint(juce::Graphics& g)
     g.setGradientFill(juce::ColourGradient(juce::Colours::lightcoral, 0, 0, juce::Colours::darkcyan, 1000, 1000, true));
     g.fillAll();
     g.setFont(15.0f);
-
 }
 
 void ClarityPlugin3AudioProcessorEditor::resized()
@@ -69,6 +71,9 @@ void ClarityPlugin3AudioProcessorEditor::resized()
 
     // mGainControlSlider
     mGainControlSlider.setBounds(area.removeFromLeft(area.getWidth() / 3));
+
+    // compressorSlider
+    compressorSlider.setBounds(area.removeFromLeft(area.getWidth() / 3));
 
     // lowPass
     lowPass.setBounds(area.removeFromLeft(area.getWidth() / 2));
@@ -169,6 +174,13 @@ void ClarityPlugin3AudioProcessorEditor::mGainControlSlider_SliderValueChanged()
 
 }
 
+void ClarityPlugin3AudioProcessorEditor::compressorSlider_SliderValueChanged()
+{
+    auto& params = processor.getParameters();
+    juce::AudioParameterFloat* compressorParameter = (juce::AudioParameterFloat*)params.getUnchecked(0);
+    *compressorParameter = compressorSlider.getValue();
+}
+
 void ClarityPlugin3AudioProcessorEditor::initialize_projectName()
 {
     addAndMakeVisible(projectName);
@@ -210,6 +222,29 @@ void ClarityPlugin3AudioProcessorEditor::initialize_gainLabel()
     gainLabel.setText("Gain", juce::dontSendNotification);
 }
 
+void ClarityPlugin3AudioProcessorEditor::initialize_compressorSlider()
+{
+    auto& params = processor.getParameters();
+    juce::AudioParameterFloat* compressorParameter = (juce::AudioParameterFloat*)params.getUnchecked(0);
+    addAndMakeVisible(compressorSlider);
+    compressorSlider.setSliderStyle(juce::Slider::LinearBarVertical);
+    compressorSlider.setRange(compressorParameter->range.start, compressorParameter->range.end);
+    compressorSlider.setValue(*compressorParameter);
+    compressorSlider.setColour(juce::Slider::trackColourId, juce::Colours::antiquewhite);
+    compressorSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 50);
+    compressorSlider.onValueChange = [this] { compressorSlider_SliderValueChanged(); };
+}
+
+void ClarityPlugin3AudioProcessorEditor::initialize_compressorLabel()
+{
+    addAndMakeVisible(compressorLabel);
+    getLookAndFeel().setColour(juce::Slider::textBoxBackgroundColourId, juce::Colours::black);
+    gainLabel.setFont(juce::Font(16.0f, juce::Font::bold));
+    gainLabel.attachToComponent(&compressorSlider, false);
+    gainLabel.setJustificationType(juce::Justification::centred);
+    gainLabel.setText("Compressor", juce::dontSendNotification);
+}
+
 void ClarityPlugin3AudioProcessorEditor::initialize_FFT()
 {
     addAndMakeVisible(FFT);
@@ -231,7 +266,7 @@ void ClarityPlugin3AudioProcessorEditor::initialize_lowPass()
     addAndMakeVisible(&lowPass);
     lowPass.setSliderStyle(juce::Slider::RotaryVerticalDrag);
     lowPass.setRange(20.0f, 20000.0f);
-    lowPass.setValue(20000.0f);
+    lowPass.setValue(19000.0f);
     lowPass.setColour(juce::Slider::thumbColourId, juce::Colour::fromRGB(96, 45, 50));
     lowPass.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 50);
     lowPass.onValueChange = [this] { lowPass_SliderValueChanged(); };
@@ -252,7 +287,7 @@ void ClarityPlugin3AudioProcessorEditor::initialize_highPass()
     addAndMakeVisible(&highPass);
     highPass.setSliderStyle(juce::Slider::RotaryVerticalDrag);
     highPass.setRange(20.0f, 20000.0f);
-    highPass.setValue(20.0f);
+    highPass.setValue(40.0f);
     highPass.setColour(juce::Slider::thumbColourId, juce::Colour::fromRGB(96, 45, 50));
     highPass.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 50);
     highPass.onValueChange = [this] { highPass_SliderValueChanged(); };

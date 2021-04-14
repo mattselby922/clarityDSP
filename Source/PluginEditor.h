@@ -4,7 +4,7 @@
 #include "PluginProcessor.h"
 #include "SimpleFFT.h"
 #include "DeviceManager.h"
-//#include "AnalyserComponent.h"
+#include "AnalyserComponent.h"
 
 //==============================================================================
 /**
@@ -24,12 +24,18 @@ public:
     void highPass_SliderValueChanged();
     void lowPass_SliderValueChanged();
     void mGainControlSlider_SliderValueChanged();
+    void compressorSlider_SliderValueChanged();
+
 
     // Initializations
     void initialize_projectName();
     void initialize_muteButton();
     void initialize_mGainControlSlider();
     void initialize_gainLabel();
+
+    void initialize_compressorSlider();
+    void initialize_compressorLabel();
+
     void initialize_FFT();
     void initialize_lowPassLabel();
     void initialize_lowPass();
@@ -52,6 +58,10 @@ private:
     // Gain
     juce::Slider mGainControlSlider;
     juce::Label gainLabel;
+
+    // Compressor
+    juce::Slider compressorSlider;
+    juce::Label compressorLabel;
 
     // Spectrogram
     SimpleFFT FFT;
