@@ -48,7 +48,11 @@ public:
 
     void updateFilter();
 
+    //initialize IIRFilter function
+    float* IIRFilter(float*);
 
+    //LMS function
+    void LMS();
 
     juce::AudioProcessorValueTreeState tree;
 

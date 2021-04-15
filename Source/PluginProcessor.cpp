@@ -1,6 +1,7 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
+
 //==============================================================================
 ClarityPlugin3AudioProcessor::ClarityPlugin3AudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
@@ -201,62 +202,54 @@ void ClarityPlugin3AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer
     //right channel
     auto* channelRight = buffer.getWritePointer(1);
 
+    //variables for LMS and IIR
+    float error;
+    float filterOutput;
+    double mu = 0.25;   // CONVERGENCE RATE [This value will be changed for efficiency testing purposes]
+    double pi = 2 * acos(0.0);
+    int M = 5;  //Order of filter
+    
+
     //processing
     for (int sample = 0; sample < buffer.getNumSamples(); sample++)
     {
         // Gain Smoothing (formula: x = x-z * (x-y) / x=smoothed value, y= target value, z= speed.
         mGainSmoothed = mGainSmoothed - 0.001 * (mGainSmoothed - mGainParameter->get());
-
+    
         channelLeft[sample] *= mGainSmoothed;
         channelRight[sample] *= mGainSmoothed;
 
         DBG(*mGainParameter);
 
-        /* Clarity IIR Filter
-
-       //Stability conditions; Infinite Impulse Response filters must adhere to these
-       if(gain >= 1)
-       {
-           gain = 0.999;
-       }
-       else if(gain <= -1)
-       {
-           gain = -0.999;
-       }
-       
-       //Difference equation
-
-       need to replace y[] and x[] with correct variables
-       y[sample] = x[sample] + (g * y[sample - 1]
-       
-
-
-       channelLeft[sample] *= ;
-       channelRight[sample] *= ;
-
-
-
-   */
-   /*Least Mean Square Algorithm
-
-      1: Get input (Audio Buffer Sample)
-
-      2: Determine desired signal
-
-      3: Convolve input and desired signal+
-
-      4: Calculate adaptive filter ouput 'y'
-
-      5: Calculate error signal
-
-      6: Update each LMS filter weights
-
-      7: Repeat for next sample
-
-
-
-      */
+        /*
+            IIR Filter
+        */
         
+        float desiredSignal = sin(mGainSmoothed * 0.05 * pi);   // Estimating desiredSignal as sin wave
+        
+        //filter the audio, storing it as filterOutput, which is then utilized in LMS algorithm to determine coefficients
+
+        /*
+            LMS
+        */
+
+        //Convolution
+        //M is order of filter, W[sample] is the weight vector, and X[sample] is the data vector
+        //filterOutput += (W[sample] * X[sample]);
+
+
+
+
+        //Calculate Error (Difference b/w desired signal d(n) and filters output y(n)
+        error = desiredSignal - filterOutput;
+
+        //Estimate of Mean Squared Error (error**2)(n)
+        for (int i = 0; i < M; i++)
+        {
+            //W[i] = W[i] + (mu * error * X[i]);
+        }
+        
+ 
     }
     //Low Pass Filter
     juce::dsp::AudioBlock<float> block(buffer);
@@ -319,4 +312,41 @@ void ClarityPlugin3AudioProcessor::updateFilter()
     *highPassFilter.state = *juce::dsp::IIR::Coefficients <float>::makeHighPass(lastSampleRate, highfreq);
     //*compressor.state = *juce::dsp::Compressor<float>::Compressor(lastSampleRate, compress);
 }
+
+/*float* ClarityPlugin3AudioProcessor::IIRFilter(float*)
+{
+  //Stability conditions; Infinite Impulse Response filters must adhere to these
+  if(mGainSmoothed >= 1)
+  {
+      mGainSmoothed = 0.999;
+  }
+  else if(mGainSmoothed <= -1)
+  {
+      mGainSmoothed = -0.999;
+  }
+
+  
+  //call LMS function
+  //Set coefficients
+
+}
+*/
+
+/*void ClarityPlugin3AudioProcessor::LMS()
+{
+    float error;
+
+    //Convolution
+    //M is length of filter, 
+    for(int i = 0; i < M; i++){
+        Y += (W[i] * X[i]);
+    }
+
+    //Calculate Error (Difference b/w desired signal d(n) and filters output y(n)
+    error = desired() - output();
+
+
+
+}*/
+
 

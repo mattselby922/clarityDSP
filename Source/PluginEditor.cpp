@@ -22,7 +22,7 @@ ClarityPlugin3AudioProcessorEditor::ClarityPlugin3AudioProcessorEditor(ClarityPl
 
     // Filters
     initialize_lowPassLabel();
-    initialize_lowPass(); //low pass knob
+    initialize_lowPass(); 
     initialize_highPassLabel();
     initialize_highPass();
     
