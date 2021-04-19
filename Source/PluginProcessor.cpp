@@ -203,11 +203,17 @@ void ClarityPlugin3AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer
     auto* channelRight = buffer.getWritePointer(1);
 
     //variables for LMS and IIR
-    float error;
-    float filterOutput;
+    float error;        // DesiredSignal - filterOutput (this is fed into LMS algorithm to improve it over time)
+    float filterOutput; // Fed into LMS
     double mu = 0.25;   // CONVERGENCE RATE [This value will be changed for efficiency testing purposes]
+                        // If mu is too large, error estimation won't be right, might never converge to local minimum
+
+    //Need to initialize weightVector, whose values will be changed by LMS
+    //weightVector = 0;
+
     double pi = 2 * acos(0.0);
-    int M = 5;  //Order of filter
+
+    int M = 5;          //Order of filter
     
 
     //processing
@@ -225,7 +231,9 @@ void ClarityPlugin3AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer
             IIR Filter
         */
         
+        //Working on desiredSignal
         float desiredSignal = sin(mGainSmoothed * 0.05 * pi);   // Estimating desiredSignal as sin wave
+                                                                // Increasing amplitude (multiplying by .05 and pi) and taking sine
         
         //filter the audio, storing it as filterOutput, which is then utilized in LMS algorithm to determine coefficients
 
@@ -233,10 +241,10 @@ void ClarityPlugin3AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer
             LMS
         */
 
+      
         //Convolution
-        //M is order of filter, W[sample] is the weight vector, and X[sample] is the data vector
-        //filterOutput += (W[sample] * X[sample]);
-
+        //weightVector[sample] are the weights to be changed, initialized 0, and channelLeft[sample] is the data vector
+        //filterOutput += (weightVector[sample] * channelLeft[sample]);
 
 
 
@@ -260,10 +268,6 @@ void ClarityPlugin3AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer
 
     //}   dont touch! outer loop closing bracket (Liam)
 
-   
-
-
-   
 }
 
 //==============================================================================
