@@ -1,6 +1,7 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
+
 //==============================================================================
 ClarityPlugin3AudioProcessorEditor::ClarityPlugin3AudioProcessorEditor(ClarityPlugin3AudioProcessor& p)
     : AudioProcessorEditor(&p),
@@ -18,7 +19,9 @@ ClarityPlugin3AudioProcessorEditor::ClarityPlugin3AudioProcessorEditor(ClarityPl
     initialize_compressorSlider();
     initialize_compressorLabel();
 
-    initialize_FFT();
+    initialize_filterToggle();
+
+    //initialize_FFT();
 
     // Filters
     initialize_lowPassLabel();
@@ -28,6 +31,14 @@ ClarityPlugin3AudioProcessorEditor::ClarityPlugin3AudioProcessorEditor(ClarityPl
     
     // Temp Device Manager Initialization
     addAndMakeVisible(theDeviceManager);
+    
+    
+ 
+    //grapher2.setVerticalZoom(2.0);
+   // grapher2.setHorizontalZoom(0.01);
+
+
+    
 }
 
 ClarityPlugin3AudioProcessorEditor::~ClarityPlugin3AudioProcessorEditor()
@@ -59,7 +70,22 @@ void ClarityPlugin3AudioProcessorEditor::resized()
     projectName.setBounds(area.removeFromTop(area.getHeight() / 20));
 
     // SimpleFFT (i.e., Spectrogram)
-    FFT.setBounds(area.removeFromTop(area.getHeight() / 3));
+    //FFT.setBounds(area.removeFromTop(area.getHeight() / 3));
+
+     // Oscilloscopes
+    addAndMakeVisible(grapher1);
+    grapher1.setTraceColour(juce::Colours::white);
+    grapher1.setBackgroundColour(juce::Colours::black);
+    grapher1.setBounds(area.removeFromTop(area.getHeight() / 3));
+
+    grapher1.setVerticalZoom(2.0);
+    grapher1.setHorizontalZoom(0.01);
+
+    addAndMakeVisible(grapher2);
+    grapher2.setTraceColour(juce::Colours::black);
+    grapher2.setBackgroundColour(juce::Colours::white);
+    grapher2.setBounds(area.removeFromTop(area.getHeight() / 3));
+    
 
     area.removeFromTop(100); // Temporary Spacing
 
@@ -73,7 +99,12 @@ void ClarityPlugin3AudioProcessorEditor::resized()
     mGainControlSlider.setBounds(area.removeFromLeft(area.getWidth() / 3));
 
     // compressorSlider
-    compressorSlider.setBounds(area.removeFromLeft(area.getWidth() / 3));
+    //compressorSlider.setBounds(area.removeFromLeft(area.getWidth() / 3));
+
+   
+
+    // filterToggle
+    filterToggle.setBounds(area.removeFromLeft(area.getWidth() / 3));
 
     // lowPass
     lowPass.setBounds(area.removeFromLeft(area.getWidth() / 2));
@@ -146,6 +177,27 @@ void ClarityPlugin3AudioProcessorEditor::muteButtonClicked()
         muteButton.setButtonText("Mute");
         addAndMakeVisible(muteButton);
         muteButton.setColour(juce::TextButton::buttonColourId, juce::Colour::fromRGB(101, 201, 134));
+    }
+}
+
+void ClarityPlugin3AudioProcessorEditor::filterToggleClicked() 
+{
+    
+    if (whichFilter == 0)
+    {
+        // Switches to LMS
+        whichFilter = 1;
+        filterToggle.setButtonText("Switch to SMA Noise Reduction");
+        filterToggle.setColour(juce::TextButton::buttonColourId, juce::Colour::fromRGB(255, 153, 204)); // sets color to pink
+
+    }
+
+    else
+    {
+        // Switches to SMA
+        whichFilter = 0;
+        filterToggle.setButtonText("Switch to LMS Noise Reduction");
+        filterToggle.setColour(juce::TextButton::buttonColourId, juce::Colour::fromRGB(102, 178, 255)); // sets color to blue  
     }
 }
 
@@ -243,6 +295,17 @@ void ClarityPlugin3AudioProcessorEditor::initialize_compressorLabel()
     gainLabel.attachToComponent(&compressorSlider, false);
     gainLabel.setJustificationType(juce::Justification::centred);
     gainLabel.setText("Compressor", juce::dontSendNotification);
+}
+
+void ClarityPlugin3AudioProcessorEditor::initialize_filterToggle() 
+{
+    // Initialize filter to start with SMA
+    whichFilter = 0;
+
+    addAndMakeVisible(filterToggle);
+    filterToggle.setColour(juce::TextButton::buttonColourId, juce::Colour::fromRGB(102, 178, 255));
+    filterToggle.setButtonText("Switch to LMS Noise Suppression");
+    filterToggle.onClick = [this] { filterToggleClicked(); };
 }
 
 void ClarityPlugin3AudioProcessorEditor::initialize_FFT()

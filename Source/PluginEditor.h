@@ -9,6 +9,7 @@
 //==============================================================================
 /**
 */
+
 class ClarityPlugin3AudioProcessorEditor : public juce::AudioProcessorEditor
 {
 public:
@@ -21,6 +22,7 @@ public:
 
     // implementing the sliderValueChanged
     void muteButtonClicked();
+    void filterToggleClicked();
     void highPass_SliderValueChanged();
     void lowPass_SliderValueChanged();
     void mGainControlSlider_SliderValueChanged();
@@ -36,11 +38,17 @@ public:
     void initialize_compressorSlider();
     void initialize_compressorLabel();
 
+    void initialize_filterToggle();
+
     void initialize_FFT();
     void initialize_lowPassLabel();
     void initialize_lowPass();
     void initialize_highPassLabel();
     void initialize_highPass();
+
+    // Defining whichFilter value (used to toggle between SMA and LMS)
+    // Initial filter is SMA
+    bool whichFilter;
 
 private:
 
@@ -63,6 +71,9 @@ private:
     juce::Slider compressorSlider;
     juce::Label compressorLabel;
 
+    // Filter toggle
+    juce::TextButton filterToggle;
+
     // Spectrogram
     SimpleFFT FFT;
 
@@ -76,6 +87,11 @@ private:
 
     // Device Manager
     DeviceManager theDeviceManager;
+
+    // Oscilloscopes
+    drow::AudioOscilloscope grapher1;
+    drow::AudioOscilloscope grapher2;
+    float* cache1;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(ClarityPlugin3AudioProcessorEditor)
 };

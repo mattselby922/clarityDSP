@@ -63,8 +63,8 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>G:\JUCE\JUCE\modules\juce_audio_processors\format_types\VST3_SDK;..\..\JuceLibraryCode;G:\JUCE\JUCE\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;DEBUG;_DEBUG;JUCE_DISPLAY_SPLASH_SCREEN=1;JUCE_USE_DARK_SPLASH_SCREEN=1;JUCE_PROJUCER_VERSION=0x60007;JUCE_MODULE_AVAILABLE_juce_audio_basics=1;JUCE_MODULE_AVAILABLE_juce_audio_devices=1;JUCE_MODULE_AVAILABLE_juce_audio_formats=1;JUCE_MODULE_AVAILABLE_juce_audio_plugin_client=1;JUCE_MODULE_AVAILABLE_juce_audio_processors=1;JUCE_MODULE_AVAILABLE_juce_audio_utils=1;JUCE_MODULE_AVAILABLE_juce_core=1;JUCE_MODULE_AVAILABLE_juce_data_structures=1;JUCE_MODULE_AVAILABLE_juce_dsp=1;JUCE_MODULE_AVAILABLE_juce_events=1;JUCE_MODULE_AVAILABLE_juce_graphics=1;JUCE_MODULE_AVAILABLE_juce_gui_basics=1;JUCE_MODULE_AVAILABLE_juce_gui_extra=1;JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1;JUCE_VST3_CAN_REPLACE_VST2=0;JUCE_STRICT_REFCOUNTEDPOINTER=1;JucePlugin_Build_VST=0;JucePlugin_Build_VST3=1;JucePlugin_Build_AU=0;JucePlugin_Build_AUv3=0;JucePlugin_Build_RTAS=0;JucePlugin_Build_AAX=0;JucePlugin_Build_Standalone=1;JucePlugin_Build_Unity=0;JucePlugin_Enable_IAA=0;JucePlugin_Name=&quot;ClarityPlugin3&quot;;JucePlugin_Desc=&quot;ClarityPlugin3&quot;;JucePlugin_Manufacturer=&quot;yourcompany&quot;;JucePlugin_ManufacturerWebsite=&quot;&quot;;JucePlugin_ManufacturerEmail=&quot;&quot;;JucePlugin_ManufacturerCode=0x4d616e75;JucePlugin_PluginCode=0x53367a70;JucePlugin_IsSynth=0;JucePlugin_WantsMidiInput=0;JucePlugin_ProducesMidiOutput=0;JucePlugin_IsMidiEffect=0;JucePlugin_EditorRequiresKeyboardFocus=0;JucePlugin_Version=1.0.0;JucePlugin_VersionCode=0x10000;JucePlugin_VersionString=&quot;1.0.0&quot;;JucePlugin_VSTUniqueID=JucePlugin_PluginCode;JucePlugin_VSTCategory=kPlugCategEffect;JucePlugin_Vst3Category=&quot;Fx&quot;;JucePlugin_AUMainType='aufx';JucePlugin_AUSubType=JucePlugin_PluginCode;JucePlugin_AUExportPrefix=ClarityPlugin3AU;JucePlugin_AUExportPrefixQuoted=&quot;ClarityPlugin3AU&quot;;JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_CFBundleIdentifier=com.yourcompany.ClarityPlugin3;JucePlugin_RTASCategory=0;JucePlugin_RTASManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_RTASProductId=JucePlugin_PluginCode;JucePlugin_RTASDisableBypass=0;JucePlugin_RTASDisableMultiMono=0;JucePlugin_AAXIdentifier=com.yourcompany.ClarityPlugin3;JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_AAXProductId=JucePlugin_PluginCode;JucePlugin_AAXCategory=0;JucePlugin_AAXDisableBypass=0;JucePlugin_AAXDisableMultiMono=0;JucePlugin_IAAType=0x61757278;JucePlugin_IAASubType=JucePlugin_PluginCode;JucePlugin_IAAName=&quot;yourcompany: ClarityPlugin3&quot;;JucePlugin_VSTNumMidiInputs=16;JucePlugin_VSTNumMidiOutputs=16;JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone;JUCER_VS2019_78A5026=1;JUCE_APP_VERSION=1.0.0;JUCE_APP_VERSION_HEX=0x10000;JUCE_SHARED_CODE=1;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>G:\JUCE\JUCE\modules\juce_audio_processors\format_types\VST3_SDK;..\..\JuceLibraryCode;G:\JUCE\JUCE\modules\drowaudio-master\module;G:\JUCE\JUCE\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;DEBUG;_DEBUG;JUCE_DISPLAY_SPLASH_SCREEN=1;JUCE_USE_DARK_SPLASH_SCREEN=1;JUCE_PROJUCER_VERSION=0x60007;JUCE_MODULE_AVAILABLE_dRowAudio=1;JUCE_MODULE_AVAILABLE_juce_audio_basics=1;JUCE_MODULE_AVAILABLE_juce_audio_devices=1;JUCE_MODULE_AVAILABLE_juce_audio_formats=1;JUCE_MODULE_AVAILABLE_juce_audio_plugin_client=1;JUCE_MODULE_AVAILABLE_juce_audio_processors=1;JUCE_MODULE_AVAILABLE_juce_audio_utils=1;JUCE_MODULE_AVAILABLE_juce_core=1;JUCE_MODULE_AVAILABLE_juce_cryptography=1;JUCE_MODULE_AVAILABLE_juce_data_structures=1;JUCE_MODULE_AVAILABLE_juce_dsp=1;JUCE_MODULE_AVAILABLE_juce_events=1;JUCE_MODULE_AVAILABLE_juce_graphics=1;JUCE_MODULE_AVAILABLE_juce_gui_basics=1;JUCE_MODULE_AVAILABLE_juce_gui_extra=1;JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1;JUCE_VST3_CAN_REPLACE_VST2=0;JUCE_STRICT_REFCOUNTEDPOINTER=1;JucePlugin_Build_VST=0;JucePlugin_Build_VST3=1;JucePlugin_Build_AU=0;JucePlugin_Build_AUv3=0;JucePlugin_Build_RTAS=0;JucePlugin_Build_AAX=0;JucePlugin_Build_Standalone=1;JucePlugin_Build_Unity=0;JucePlugin_Enable_IAA=0;JucePlugin_Name=&quot;ClarityPlugin3&quot;;JucePlugin_Desc=&quot;ClarityPlugin3&quot;;JucePlugin_Manufacturer=&quot;yourcompany&quot;;JucePlugin_ManufacturerWebsite=&quot;&quot;;JucePlugin_ManufacturerEmail=&quot;&quot;;JucePlugin_ManufacturerCode=0x4d616e75;JucePlugin_PluginCode=0x53367a70;JucePlugin_IsSynth=0;JucePlugin_WantsMidiInput=0;JucePlugin_ProducesMidiOutput=0;JucePlugin_IsMidiEffect=0;JucePlugin_EditorRequiresKeyboardFocus=0;JucePlugin_Version=1.0.0;JucePlugin_VersionCode=0x10000;JucePlugin_VersionString=&quot;1.0.0&quot;;JucePlugin_VSTUniqueID=JucePlugin_PluginCode;JucePlugin_VSTCategory=kPlugCategEffect;JucePlugin_Vst3Category=&quot;Fx&quot;;JucePlugin_AUMainType='aufx';JucePlugin_AUSubType=JucePlugin_PluginCode;JucePlugin_AUExportPrefix=ClarityPlugin3AU;JucePlugin_AUExportPrefixQuoted=&quot;ClarityPlugin3AU&quot;;JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_CFBundleIdentifier=com.yourcompany.ClarityPlugin3;JucePlugin_RTASCategory=0;JucePlugin_RTASManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_RTASProductId=JucePlugin_PluginCode;JucePlugin_RTASDisableBypass=0;JucePlugin_RTASDisableMultiMono=0;JucePlugin_AAXIdentifier=com.yourcompany.ClarityPlugin3;JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_AAXProductId=JucePlugin_PluginCode;JucePlugin_AAXCategory=0;JucePlugin_AAXDisableBypass=0;JucePlugin_AAXDisableMultiMono=0;JucePlugin_IAAType=0x61757278;JucePlugin_IAASubType=JucePlugin_PluginCode;JucePlugin_IAAName=&quot;yourcompany: ClarityPlugin3&quot;;JucePlugin_VSTNumMidiInputs=16;JucePlugin_VSTNumMidiOutputs=16;JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone;JUCER_VS2019_78A5026=1;JUCE_APP_VERSION=1.0.0;JUCE_APP_VERSION_HEX=0x10000;JUCE_SHARED_CODE=1;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -103,8 +103,8 @@
     </Midl>
     <ClCompile>
       <Optimization>Full</Optimization>
-      <AdditionalIncludeDirectories>G:\JUCE\JUCE\modules\juce_audio_processors\format_types\VST3_SDK;..\..\JuceLibraryCode;G:\JUCE\JUCE\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;NDEBUG;JUCE_DISPLAY_SPLASH_SCREEN=1;JUCE_USE_DARK_SPLASH_SCREEN=1;JUCE_PROJUCER_VERSION=0x60007;JUCE_MODULE_AVAILABLE_juce_audio_basics=1;JUCE_MODULE_AVAILABLE_juce_audio_devices=1;JUCE_MODULE_AVAILABLE_juce_audio_formats=1;JUCE_MODULE_AVAILABLE_juce_audio_plugin_client=1;JUCE_MODULE_AVAILABLE_juce_audio_processors=1;JUCE_MODULE_AVAILABLE_juce_audio_utils=1;JUCE_MODULE_AVAILABLE_juce_core=1;JUCE_MODULE_AVAILABLE_juce_data_structures=1;JUCE_MODULE_AVAILABLE_juce_dsp=1;JUCE_MODULE_AVAILABLE_juce_events=1;JUCE_MODULE_AVAILABLE_juce_graphics=1;JUCE_MODULE_AVAILABLE_juce_gui_basics=1;JUCE_MODULE_AVAILABLE_juce_gui_extra=1;JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1;JUCE_VST3_CAN_REPLACE_VST2=0;JUCE_STRICT_REFCOUNTEDPOINTER=1;JucePlugin_Build_VST=0;JucePlugin_Build_VST3=1;JucePlugin_Build_AU=0;JucePlugin_Build_AUv3=0;JucePlugin_Build_RTAS=0;JucePlugin_Build_AAX=0;JucePlugin_Build_Standalone=1;JucePlugin_Build_Unity=0;JucePlugin_Enable_IAA=0;JucePlugin_Name=&quot;ClarityPlugin3&quot;;JucePlugin_Desc=&quot;ClarityPlugin3&quot;;JucePlugin_Manufacturer=&quot;yourcompany&quot;;JucePlugin_ManufacturerWebsite=&quot;&quot;;JucePlugin_ManufacturerEmail=&quot;&quot;;JucePlugin_ManufacturerCode=0x4d616e75;JucePlugin_PluginCode=0x53367a70;JucePlugin_IsSynth=0;JucePlugin_WantsMidiInput=0;JucePlugin_ProducesMidiOutput=0;JucePlugin_IsMidiEffect=0;JucePlugin_EditorRequiresKeyboardFocus=0;JucePlugin_Version=1.0.0;JucePlugin_VersionCode=0x10000;JucePlugin_VersionString=&quot;1.0.0&quot;;JucePlugin_VSTUniqueID=JucePlugin_PluginCode;JucePlugin_VSTCategory=kPlugCategEffect;JucePlugin_Vst3Category=&quot;Fx&quot;;JucePlugin_AUMainType='aufx';JucePlugin_AUSubType=JucePlugin_PluginCode;JucePlugin_AUExportPrefix=ClarityPlugin3AU;JucePlugin_AUExportPrefixQuoted=&quot;ClarityPlugin3AU&quot;;JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_CFBundleIdentifier=com.yourcompany.ClarityPlugin3;JucePlugin_RTASCategory=0;JucePlugin_RTASManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_RTASProductId=JucePlugin_PluginCode;JucePlugin_RTASDisableBypass=0;JucePlugin_RTASDisableMultiMono=0;JucePlugin_AAXIdentifier=com.yourcompany.ClarityPlugin3;JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_AAXProductId=JucePlugin_PluginCode;JucePlugin_AAXCategory=0;JucePlugin_AAXDisableBypass=0;JucePlugin_AAXDisableMultiMono=0;JucePlugin_IAAType=0x61757278;JucePlugin_IAASubType=JucePlugin_PluginCode;JucePlugin_IAAName=&quot;yourcompany: ClarityPlugin3&quot;;JucePlugin_VSTNumMidiInputs=16;JucePlugin_VSTNumMidiOutputs=16;JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone;JUCER_VS2019_78A5026=1;JUCE_APP_VERSION=1.0.0;JUCE_APP_VERSION_HEX=0x10000;JUCE_SHARED_CODE=1;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>G:\JUCE\JUCE\modules\juce_audio_processors\format_types\VST3_SDK;..\..\JuceLibraryCode;G:\JUCE\JUCE\modules\drowaudio-master\module;G:\JUCE\JUCE\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;NDEBUG;JUCE_DISPLAY_SPLASH_SCREEN=1;JUCE_USE_DARK_SPLASH_SCREEN=1;JUCE_PROJUCER_VERSION=0x60007;JUCE_MODULE_AVAILABLE_dRowAudio=1;JUCE_MODULE_AVAILABLE_juce_audio_basics=1;JUCE_MODULE_AVAILABLE_juce_audio_devices=1;JUCE_MODULE_AVAILABLE_juce_audio_formats=1;JUCE_MODULE_AVAILABLE_juce_audio_plugin_client=1;JUCE_MODULE_AVAILABLE_juce_audio_processors=1;JUCE_MODULE_AVAILABLE_juce_audio_utils=1;JUCE_MODULE_AVAILABLE_juce_core=1;JUCE_MODULE_AVAILABLE_juce_cryptography=1;JUCE_MODULE_AVAILABLE_juce_data_structures=1;JUCE_MODULE_AVAILABLE_juce_dsp=1;JUCE_MODULE_AVAILABLE_juce_events=1;JUCE_MODULE_AVAILABLE_juce_graphics=1;JUCE_MODULE_AVAILABLE_juce_gui_basics=1;JUCE_MODULE_AVAILABLE_juce_gui_extra=1;JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1;JUCE_VST3_CAN_REPLACE_VST2=0;JUCE_STRICT_REFCOUNTEDPOINTER=1;JucePlugin_Build_VST=0;JucePlugin_Build_VST3=1;JucePlugin_Build_AU=0;JucePlugin_Build_AUv3=0;JucePlugin_Build_RTAS=0;JucePlugin_Build_AAX=0;JucePlugin_Build_Standalone=1;JucePlugin_Build_Unity=0;JucePlugin_Enable_IAA=0;JucePlugin_Name=&quot;ClarityPlugin3&quot;;JucePlugin_Desc=&quot;ClarityPlugin3&quot;;JucePlugin_Manufacturer=&quot;yourcompany&quot;;JucePlugin_ManufacturerWebsite=&quot;&quot;;JucePlugin_ManufacturerEmail=&quot;&quot;;JucePlugin_ManufacturerCode=0x4d616e75;JucePlugin_PluginCode=0x53367a70;JucePlugin_IsSynth=0;JucePlugin_WantsMidiInput=0;JucePlugin_ProducesMidiOutput=0;JucePlugin_IsMidiEffect=0;JucePlugin_EditorRequiresKeyboardFocus=0;JucePlugin_Version=1.0.0;JucePlugin_VersionCode=0x10000;JucePlugin_VersionString=&quot;1.0.0&quot;;JucePlugin_VSTUniqueID=JucePlugin_PluginCode;JucePlugin_VSTCategory=kPlugCategEffect;JucePlugin_Vst3Category=&quot;Fx&quot;;JucePlugin_AUMainType='aufx';JucePlugin_AUSubType=JucePlugin_PluginCode;JucePlugin_AUExportPrefix=ClarityPlugin3AU;JucePlugin_AUExportPrefixQuoted=&quot;ClarityPlugin3AU&quot;;JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_CFBundleIdentifier=com.yourcompany.ClarityPlugin3;JucePlugin_RTASCategory=0;JucePlugin_RTASManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_RTASProductId=JucePlugin_PluginCode;JucePlugin_RTASDisableBypass=0;JucePlugin_RTASDisableMultiMono=0;JucePlugin_AAXIdentifier=com.yourcompany.ClarityPlugin3;JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_AAXProductId=JucePlugin_PluginCode;JucePlugin_AAXCategory=0;JucePlugin_AAXDisableBypass=0;JucePlugin_AAXDisableMultiMono=0;JucePlugin_IAAType=0x61757278;JucePlugin_IAASubType=JucePlugin_PluginCode;JucePlugin_IAAName=&quot;yourcompany: ClarityPlugin3&quot;;JucePlugin_VSTNumMidiInputs=16;JucePlugin_VSTNumMidiOutputs=16;JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone;JUCER_VS2019_78A5026=1;JUCE_APP_VERSION=1.0.0;JUCE_APP_VERSION_HEX=0x10000;JUCE_SHARED_CODE=1;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -139,6 +139,198 @@
   <ItemGroup>
     <ClCompile Include="..\..\Source\PluginProcessor.cpp"/>
     <ClCompile Include="..\..\Source\PluginEditor.cpp"/>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\fft\dRowAudio_FFT.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\fft\dRowAudio_LTAS.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\fft\dRowAudio_mac_FFTOperation.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\fft\dRowAudio_Window.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\filters\dRowAudio_BiquadFilter.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\filters\dRowAudio_OnePoleFilter.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\soundtouch\AAFilter.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\soundtouch\BPMDetect.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\soundtouch\cpu_detect_x64_gcc.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\soundtouch\cpu_detect_x64_win.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\soundtouch\cpu_detect_x86_gcc.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\soundtouch\cpu_detect_x86_win.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\soundtouch\FIFOSampleBuffer.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\soundtouch\FIRFilter.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\soundtouch\mmx_optimized.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\soundtouch\PeakFinder.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\soundtouch\RateTransposer.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\soundtouch\SoundTouch.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\soundtouch\SoundTouch_Source.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\soundtouch\sse_optimized.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\soundtouch\TDStretch.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\dRowAudio_AudioFilePlayer.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\dRowAudio_AudioFilePlayerExt.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\dRowAudio_AudioSampleBufferAudioFormat.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\dRowAudio_AudioUtilityUnitTests.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\dRowAudio_EnvelopeFollower.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\dRowAudio_FilteringAudioSource.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\dRowAudio_LoopingAudioSource.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\dRowAudio_PitchDetector.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\dRowAudio_ReversibleAudioSource.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\dRowAudio_SampleRateConverter.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\dRowAudio_SoundTouchAudioSource.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\dRowAudio_SoundTouchProcessor.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\audiothumbnail\dRowAudio_AudioThumbnailImage.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\audiothumbnail\dRowAudio_ColouredAudioThumbnail.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\audiothumbnail\dRowAudio_DraggableWaveDisplay.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\audiothumbnail\dRowAudio_PositionableWaveDisplay.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\filebrowser\dRowAudio_BasicFileBrowser.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\filebrowser\dRowAudio_ColumnFileBrowser.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\dRowAudio_AudioFileDropTarget.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\dRowAudio_AudioOscilloscope.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\dRowAudio_AudioTransportCursor.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\dRowAudio_CentreAlignViewport.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\dRowAudio_Clock.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\dRowAudio_CpuMeter.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\dRowAudio_DefaultColours.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\dRowAudio_GraphicalComponent.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\dRowAudio_MusicLibraryTable.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\dRowAudio_SegmentedMeter.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\dRowAudio_Sonogram.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\dRowAudio_Spectrograph.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\dRowAudio_Spectroscope.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\dRowAudio_TriggeredScope.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\maths\dRowAudio_MathsUnitTests.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\network\dRowAudio_CURLEasySession.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\network\dRowAudio_CURLManager.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\parameters\dRowAudio_PluginParameter.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\streams\dRowAudio_MemoryInputSource.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\utility\dRowAudio_EncryptedString.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\utility\dRowAudio_ITunesLibrary.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\utility\dRowAudio_ITunesLibraryParser.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\utility\dRowAudio_UnityBuilder.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\utility\dRowAudio_UnityProjectBuilder.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\dRowAudio.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="G:\JUCE\JUCE\modules\juce_audio_basics\buffers\juce_AudioChannelSet.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
@@ -1153,6 +1345,27 @@
     <ClCompile Include="G:\JUCE\JUCE\modules\juce_core\juce_core.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\juce_cryptography\encryption\juce_BlowFish.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\juce_cryptography\encryption\juce_Primes.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\juce_cryptography\encryption\juce_RSAKey.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\juce_cryptography\hashing\juce_MD5.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\juce_cryptography\hashing\juce_SHA256.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\juce_cryptography\hashing\juce_Whirlpool.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\JUCE\JUCE\modules\juce_cryptography\juce_cryptography.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="G:\JUCE\JUCE\modules\juce_data_structures\app_properties\juce_ApplicationProperties.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
@@ -2140,6 +2353,7 @@
     <ClCompile Include="G:\JUCE\JUCE\modules\juce_gui_extra\juce_gui_extra.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\include_dRowAudio.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_basics.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_devices.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_formats.cpp"/>
@@ -2147,6 +2361,7 @@
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_processors.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_utils.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_core.cpp"/>
+    <ClCompile Include="..\..\JuceLibraryCode\include_juce_cryptography.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_data_structures.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_dsp.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_events.cpp"/>
@@ -2160,6 +2375,115 @@
     <ClInclude Include="..\..\Source\AnalyserComponent.h"/>
     <ClInclude Include="..\..\Source\PluginProcessor.h"/>
     <ClInclude Include="..\..\Source\PluginEditor.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\fft\fftreal\Array.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\fft\fftreal\Array.hpp"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\fft\fftreal\def.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\fft\fftreal\DynArray.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\fft\fftreal\DynArray.hpp"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\fft\fftreal\FFTReal.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\fft\fftreal\FFTReal.hpp"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\fft\fftreal\FFTRealFixLen.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\fft\fftreal\FFTRealFixLen.hpp"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\fft\fftreal\FFTRealFixLenParam.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\fft\fftreal\FFTRealPassDirect.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\fft\fftreal\FFTRealPassDirect.hpp"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\fft\fftreal\FFTRealPassInverse.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\fft\fftreal\FFTRealPassInverse.hpp"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\fft\fftreal\FFTRealSelect.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\fft\fftreal\FFTRealSelect.hpp"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\fft\fftreal\FFTRealUseTrigo.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\fft\fftreal\FFTRealUseTrigo.hpp"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\fft\fftreal\OscSinCos.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\fft\fftreal\OscSinCos.hpp"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\fft\dRowAudio_FFT.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\fft\dRowAudio_LTAS.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\fft\dRowAudio_Window.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\filters\dRowAudio_BiquadFilter.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\filters\dRowAudio_OnePoleFilter.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\soundtouch\AAFilter.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\soundtouch\BPMDetect.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\soundtouch\cpu_detect.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\soundtouch\FIFOSampleBuffer.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\soundtouch\FIFOSamplePipe.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\soundtouch\FIRFilter.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\soundtouch\PeakFinder.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\soundtouch\RateTransposer.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\soundtouch\SoundTouch.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\soundtouch\soundtouch_config.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\soundtouch\SoundTouch_Includes.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\soundtouch\STTypes.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\soundtouch\TDStretch.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\dRowAudio_AudioFilePlayer.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\dRowAudio_AudioFilePlayerExt.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\dRowAudio_AudioSampleBufferAudioFormat.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\dRowAudio_AudioUtility.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\dRowAudio_Buffer.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\dRowAudio_EnvelopeFollower.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\dRowAudio_FifoBuffer.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\dRowAudio_FilteringAudioSource.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\dRowAudio_LoopingAudioSource.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\dRowAudio_Pitch.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\dRowAudio_PitchDetector.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\dRowAudio_ReversibleAudioSource.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\dRowAudio_SampleRateConverter.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\dRowAudio_SoundTouchAudioSource.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\audio\dRowAudio_SoundTouchProcessor.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\audiothumbnail\dRowAudio_AudioThumbnailImage.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\audiothumbnail\dRowAudio_ColouredAudioThumbnail.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\audiothumbnail\dRowAudio_DraggableWaveDisplay.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\audiothumbnail\dRowAudio_PositionableWaveDisplay.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\filebrowser\dRowAudio_BasicFileBrowser.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\filebrowser\dRowAudio_ColumnFileBrowser.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\filebrowser\dRowAudio_ColumnFileBrowserLookAndFeel.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\dRowAudio_AudioFileDropTarget.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\dRowAudio_AudioOscilloscope.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\dRowAudio_AudioTransportCursor.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\dRowAudio_CentreAlignViewport.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\dRowAudio_Clock.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\dRowAudio_CpuMeter.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\dRowAudio_DefaultColours.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\dRowAudio_GraphicalComponent.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\dRowAudio_GuiHelpers.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\dRowAudio_MusicLibraryTable.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\dRowAudio_SegmentedMeter.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\dRowAudio_Sonogram.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\dRowAudio_Spectrograph.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\dRowAudio_Spectroscope.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\gui\dRowAudio_TriggeredScope.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\maths\dRowAudio_BezierCurve.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\maths\dRowAudio_CumulativeMovingAverage.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\maths\dRowAudio_MathsUtilities.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\native\dRowAudio_AudioPicker.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\native\dRowAudio_AVAssetAudioFormat.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\native\dRowAudio_IOSAudioConverter.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\network\curl\include\curl\curl.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\network\curl\include\curl\curlbuild.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\network\curl\include\curl\curlrules.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\network\curl\include\curl\curlver.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\network\curl\include\curl\easy.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\network\curl\include\curl\mprintf.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\network\curl\include\curl\multi.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\network\curl\include\curl\stdcheaders.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\network\curl\include\curl\typecheck-gcc.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\network\dRowAudio_CURLEasySession.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\network\dRowAudio_CURLManager.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\parameters\dRowAudio_PluginParameter.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\streams\dRowAudio_MemoryInputSource.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\streams\dRowAudio_StreamAndFileHandler.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\utility\dRowAudio_Comparators.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\utility\dRowAudio_Constants.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\utility\dRowAudio_DebugObject.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\utility\dRowAudio_EncryptedString.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\utility\dRowAudio_ITunesLibrary.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\utility\dRowAudio_ITunesLibraryParser.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\utility\dRowAudio_LockedPointer.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\utility\dRowAudio_MusicLibraryHelpers.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\utility\dRowAudio_StateVariable.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\utility\dRowAudio_UnityBuilder.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\utility\dRowAudio_UnityProjectBuilder.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\utility\dRowAudio_Utility.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\utility\dRowAudio_XmlHelpers.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\drowaudio-master\module\dRowAudio\dRowAudio.h"/>
     <ClInclude Include="G:\JUCE\JUCE\modules\juce_audio_basics\audio_play_head\juce_AudioPlayHead.h"/>
     <ClInclude Include="G:\JUCE\JUCE\modules\juce_audio_basics\buffers\juce_AudioChannelSet.h"/>
     <ClInclude Include="G:\JUCE\JUCE\modules\juce_audio_basics\buffers\juce_AudioDataConverters.h"/>
@@ -2646,6 +2970,13 @@
     <ClInclude Include="G:\JUCE\JUCE\modules\juce_core\zip\juce_GZIPDecompressorInputStream.h"/>
     <ClInclude Include="G:\JUCE\JUCE\modules\juce_core\zip\juce_ZipFile.h"/>
     <ClInclude Include="G:\JUCE\JUCE\modules\juce_core\juce_core.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\juce_cryptography\encryption\juce_BlowFish.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\juce_cryptography\encryption\juce_Primes.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\juce_cryptography\encryption\juce_RSAKey.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\juce_cryptography\hashing\juce_MD5.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\juce_cryptography\hashing\juce_SHA256.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\juce_cryptography\hashing\juce_Whirlpool.h"/>
+    <ClInclude Include="G:\JUCE\JUCE\modules\juce_cryptography\juce_cryptography.h"/>
     <ClInclude Include="G:\JUCE\JUCE\modules\juce_data_structures\app_properties\juce_ApplicationProperties.h"/>
     <ClInclude Include="G:\JUCE\JUCE\modules\juce_data_structures\app_properties\juce_PropertiesFile.h"/>
     <ClInclude Include="G:\JUCE\JUCE\modules\juce_data_structures\undomanager\juce_UndoableAction.h"/>

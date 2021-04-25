@@ -1,6 +1,7 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
+#define SMA_AVERAGE 20
 
 //==============================================================================
 ClarityPlugin3AudioProcessor::ClarityPlugin3AudioProcessor()
@@ -44,11 +45,21 @@ ClarityPlugin3AudioProcessor::ClarityPlugin3AudioProcessor()
 
     tree.createAndAddParameter("compressorId", "compressor", "compressor",
         juce::NormalisableRange<float>(0.0f, 100.0f), 20.0f, nullptr, nullptr);
+
+
+
+
+
+    //SMA
+    cache1 = createCache(SMA_AVERAGE);
+
+
 }
 
 
 ClarityPlugin3AudioProcessor::~ClarityPlugin3AudioProcessor()
 {
+
 }
 
 //==============================================================================
@@ -137,8 +148,11 @@ void ClarityPlugin3AudioProcessor::prepareToPlay(double sampleRate, int samplesP
 
 void ClarityPlugin3AudioProcessor::releaseResources()
 {
-    // When playback stops, you can use this as an opportunity to free up any
-    // spare memory, etc.
+    // This will be called when the audio device stops, or when it is being
+   // restarted due to a setting change.
+
+   // For more details, see the help for AudioProcessor::releaseResources()
+    free(cache1);
 }
 
 #ifndef JucePlugin_PreferredChannelConfigurations
@@ -192,73 +206,130 @@ void ClarityPlugin3AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer
 
     // I got rid of this outer loop, because I had to grab left and right channels at the same time (Liam)
 
-    //for (int channel = 0; channel < totalNumInputChannels; ++channel)
+    // for (int channel = 0; channel < totalNumInputChannels; ++channel)
     //{
 
 
-    //left channel
+    // left channel
     auto* channelLeft = buffer.getWritePointer(0);
 
-    //right channel
+    // right channel
     auto* channelRight = buffer.getWritePointer(1);
 
-    //variables for LMS and IIR
+
+    //auto* inBuffer = buffer.getReadPointer(0, buffer.);
+    
+    
+    // variables for LMS and IIR
     float error;        // DesiredSignal - filterOutput (this is fed into LMS algorithm to improve it over time)
     float filterOutput; // Fed into LMS
-    double mu = 0.25;   // CONVERGENCE RATE [This value will be changed for efficiency testing purposes]
-                        // If mu is too large, error estimation won't be right, might never converge to local minimum
-
-    //Need to initialize weightVector, whose values will be changed by LMS
-    //weightVector = 0;
+    
+    float r = (buffer.getNumSamples() * 100) / 10000;        // # of runs (used for Error Performance)
 
     double pi = 2 * acos(0.0);
 
-    int M = 5;          //Order of filter
+    int filterOrder = 5;                    // Order of filter (number of weights/coefficients)
     
+    double mu = 0.25;                       // CONVERGENCE RATE [This value will be changed for efficiency testing purposes]
+                                            // If mu is too large, error estimation won't be right, might never converge to local minimum
+
+    float weights[] = { 0, 0, 0, 0, 0};     //Create array with filterOrder elements (initialized to 0)
+    
+    // Desired signal will be actual signal - sine wave (sine wave represents white noise)
+    float whiteNoise = sin(0.05 * pi);       // Increasing amplitude (multiplying by .05 and pi) and taking sine
+    
+    // need desired signal - white noise
+    
+                                                            
+    
+
+
 
     //processing
-    for (int sample = 0; sample < buffer.getNumSamples(); sample++)
-    {
-        // Gain Smoothing (formula: x = x-z * (x-y) / x=smoothed value, y= target value, z= speed.
-        mGainSmoothed = mGainSmoothed - 0.001 * (mGainSmoothed - mGainParameter->get());
     
-        channelLeft[sample] *= mGainSmoothed;
-        channelRight[sample] *= mGainSmoothed;
-
-        DBG(*mGainParameter);
-
-        /*
-            IIR Filter
-        */
-        
-        //Working on desiredSignal
-        float desiredSignal = sin(mGainSmoothed * 0.05 * pi);   // Estimating desiredSignal as sin wave
-                                                                // Increasing amplitude (multiplying by .05 and pi) and taking sine
-        
-        //filter the audio, storing it as filterOutput, which is then utilized in LMS algorithm to determine coefficients
-
-        /*
-            LMS
-        */
-
-      
-        //Convolution
-        //weightVector[sample] are the weights to be changed, initialized 0, and channelLeft[sample] is the data vector
-        //filterOutput += (weightVector[sample] * channelLeft[sample]);
+    // get value of filterToggle here
 
 
+    // If user has selected SMA Noise Suppression:
+    
+    /*if (whichFilter == 0) 
+    {*/
+    grapher1.processBlock(channelLeft, buffer.getNumSamples());
 
-        //Calculate Error (Difference b/w desired signal d(n) and filters output y(n)
-        error = desiredSignal - filterOutput;
 
-        //Estimate of Mean Squared Error (error**2)(n)
-        for (int i = 0; i < M; i++)
+        for (int sample = 0; sample < buffer.getNumSamples(); sample++)
         {
-            //W[i] = W[i] + (mu * error * X[i]);
+            
+            // Gain Smoothing (formula: x = x-z * (x-y) / x=smoothed value, y= target value, z= speed.
+            mGainSmoothed = mGainSmoothed - 0.001 * (mGainSmoothed - mGainParameter->get());
+
+            channelLeft[sample] *= mGainSmoothed;
+            channelRight[sample] *= mGainSmoothed;
+
+            DBG(*mGainParameter);
+
+
+            channelLeft[sample] = simpleMovingAverage(SMA_AVERAGE, channelLeft[sample], cache1);
+            channelRight[sample] = simpleMovingAverage(SMA_AVERAGE, channelRight[sample], cache1);
+
+
+            grapher2.processBlock(channelLeft, buffer.getNumSamples());
         }
-        
- 
-    }
+    
+
+    // If user has selected LMS Noise Suppression:
+    /*else if (whichFilter == 1)
+    {
+        for (int sample = 0; sample < buffer.getNumSamples(); sample++)
+        {
+            // Gain Smoothing (formula: x = x-z * (x-y) / x=smoothed value, y= target value, z= speed.
+            mGainSmoothed = mGainSmoothed - 0.001 * (mGainSmoothed - mGainParameter->get());
+
+            channelLeft[sample] *= mGainSmoothed;
+            channelRight[sample] *= mGainSmoothed;
+
+            DBG(*mGainParameter);
+
+*/
+            /*
+                IIR Filter
+            */
+
+
+
+            // filter the audio, storing it as filterOutput, which is then utilized in LMS algorithm to determine coefficients
+
+            /*
+                LMS
+            */
+
+
+            // Convolution
+            // weightVector[sample] are the weights to be changed, initialized 0, and channelLeft[sample] is the data vector
+            // filterOutput += (weightVector[sample] * channelLeft[sample]);
+
+
+
+            // Calculate Error (Difference b/w desired signal d(n) and filters output y(n)
+            //error = desiredSignal - filterOutput;
+
+            // Estimate of Mean Squared Error (error**2)(n)
+            //MSE = MSE + abs(MSE ** 2);
+
+    /*
+            // X[] is input buffer
+            // Weights are adjusted so that Mean Squared Error function is minimized
+            // We don't fully understand the application of the Mean Squared Error risk function
+            for (int i = 0; i < filterOrder; i++)
+            {
+                //weights[i] = weights[i] + (mu * error * X[i]);
+            }
+
+
+        }
+    }*/
+
+
     //Low Pass Filter
     juce::dsp::AudioBlock<float> block(buffer);
     updateFilter();
@@ -316,6 +387,40 @@ void ClarityPlugin3AudioProcessor::updateFilter()
     *highPassFilter.state = *juce::dsp::IIR::Coefficients <float>::makeHighPass(lastSampleRate, highfreq);
     //*compressor.state = *juce::dsp::Compressor<float>::Compressor(lastSampleRate, compress);
 }
+
+float* ClarityPlugin3AudioProcessor::createCache(int period)
+{
+    return (float*)malloc(sizeof(float) * period);
+}
+
+float ClarityPlugin3AudioProcessor::simpleMovingAverage(int period, float dataPoint, float* cache)
+{
+    static int count = 0;
+    float accumulator = 0;
+    if (count >= SMA_AVERAGE)
+    {
+        for (int i = 0; i < period - 1; i++)
+        {
+            cache[i] = cache[i + 1];
+        }
+        cache[period - 1] = dataPoint;
+
+        for (int i = 0; i < period; i++)
+        {
+            accumulator += *(cache + i);
+        }
+        return accumulator / period;
+    }
+    else
+    {
+        *(cache + count) = dataPoint;
+        count++;
+        return dataPoint;
+    }
+}
+
+
+
 
 /*float* ClarityPlugin3AudioProcessor::IIRFilter(float*)
 {
