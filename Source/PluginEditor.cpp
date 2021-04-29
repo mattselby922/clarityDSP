@@ -272,15 +272,16 @@ void ClarityPlugin3AudioProcessorEditor::initialize_grapher()
     auto area = getLocalBounds();
 
     // Oscilloscopes
-    addAndMakeVisible(ClarityPlugin3AudioPluginProcessor::grapher1);
+    addAndMakeVisible(ClarityPlugin3AudioProcessor::grapher1);
     grapher1.setTraceColour(juce::Colours::white);
     grapher1.setBackgroundColour(juce::Colours::black);
     grapher1.setBounds(area.removeFromTop(area.getHeight() / 4));
 
-    addAndMakeVisible(grapher2);
-    grapher2.setTraceColour(juce::Colours::black);
-    grapher2.setBackgroundColour(juce::Colours::white);
+    addAndMakeVisible(ClarityPlugin3AudioProcessor::grapher2);
+    grapher2.setTraceColour(juce::Colours::white);
+    grapher2.setBackgroundColour(juce::Colours::black);
     grapher2.setBounds(area.removeFromTop(area.getHeight() / 4));
+
 
 }
 

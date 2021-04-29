@@ -261,6 +261,7 @@ void ClarityPlugin3AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer
    
     auto* inBuffer = buffer.getReadPointer(channel);
     auto* outBuffer = buffer.getWritePointer(channel);
+    //DBG(totalNumInputChannels);
 
         for (int sample = 0; sample < buffer.getNumSamples(); sample++)
         {

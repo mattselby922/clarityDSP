@@ -10,7 +10,7 @@
 /**
 */
 
-class ClarityPlugin3AudioProcessorEditor : public juce::AudioProcessorEditor
+class ClarityPlugin3AudioProcessorEditor : public juce::AudioProcessorEditor, public ClarityPlugin3AudioProcessor
 {
 public:
     ClarityPlugin3AudioProcessorEditor(ClarityPlugin3AudioProcessor&);

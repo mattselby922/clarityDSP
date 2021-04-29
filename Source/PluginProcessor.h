@@ -72,7 +72,7 @@ public:
     float* cache2;
 
 
-    void getGrapher(drow::AudioOscilloscope grapher1, drow::AudioOscilloscope grapher2, float* cache1, float* cache2);
+    //void getGrapher(drow::AudioOscilloscope grapher1, drow::AudioOscilloscope grapher2, float* cache1, float* cache2);
 
 private:
     // Defining AudioProcessorFloat of Gain
