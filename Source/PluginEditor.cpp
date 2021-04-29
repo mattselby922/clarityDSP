@@ -22,6 +22,7 @@ ClarityPlugin3AudioProcessorEditor::ClarityPlugin3AudioProcessorEditor(ClarityPl
     initialize_filterToggle();
 
     //initialize_FFT();
+    initialize_grapher();
 
     // Filters
     initialize_lowPassLabel();
@@ -72,19 +73,6 @@ void ClarityPlugin3AudioProcessorEditor::resized()
     // SimpleFFT (i.e., Spectrogram)
     //FFT.setBounds(area.removeFromTop(area.getHeight() / 3));
 
-     // Oscilloscopes
-    addAndMakeVisible(grapher1);
-    grapher1.setTraceColour(juce::Colours::white);
-    grapher1.setBackgroundColour(juce::Colours::black);
-    grapher1.setBounds(area.removeFromTop(area.getHeight() / 3));
-
-    grapher1.setVerticalZoom(2.0);
-    grapher1.setHorizontalZoom(0.01);
-
-    addAndMakeVisible(grapher2);
-    grapher2.setTraceColour(juce::Colours::black);
-    grapher2.setBackgroundColour(juce::Colours::white);
-    grapher2.setBounds(area.removeFromTop(area.getHeight() / 3));
     
 
     area.removeFromTop(100); // Temporary Spacing
@@ -102,7 +90,6 @@ void ClarityPlugin3AudioProcessorEditor::resized()
     //compressorSlider.setBounds(area.removeFromLeft(area.getWidth() / 3));
 
    
-
     // filterToggle
     filterToggle.setBounds(area.removeFromLeft(area.getWidth() / 3));
 
@@ -112,39 +99,6 @@ void ClarityPlugin3AudioProcessorEditor::resized()
     // highPass
     highPass.setBounds(area);
 
-    /*
-    //Positioning projectName
-    projectName.setBounds(area.removeFromTop(area.getHeight() / 20));
-
-    //flexbox for EQ
-    juce::FlexBox EQ;
-    EQ.flexDirection = juce::FlexBox::Direction::row;
-    EQ.flexWrap = juce::FlexBox::Wrap::wrap;
-    EQ.alignContent = juce::FlexBox::AlignContent::flexEnd;
-
-    juce::Array<juce::FlexItem> EQArray;
-    //EQArray.add(juce::FlexItem(200,200, ));   //adding
-    EQ.items = EQArray;
-    EQ.performLayout(getLocalBounds().toFloat());
-
-    //flexbox for filters
-    juce::FlexBox filters;
-    filters.flexDirection = juce::FlexBox::Direction::row;
-    filters.flexWrap = juce::FlexBox::Wrap::wrap;
-    filters.alignContent = juce::FlexBox::AlignContent::flexEnd;
-
-    juce::Array<juce::FlexItem> filtersArray;
-    filtersArray.add(juce::FlexItem(100, 0, muteButton));               //adding mute button to flexbox
-    filtersArray.add(juce::FlexItem(200, 200, mGainControlSlider));     //adding gain knob
-    filtersArray.add(juce::FlexItem(50, 50, gainLabel));                //adding gainLabel
-    filtersArray.add(juce::FlexItem(125, 125, lowPass));                //adding lowPass filter knob
-    filtersArray.add(juce::FlexItem(125, 125, highPass));               //adding highPass filter knob
-
-    filters.items = filtersArray;
-    filters.performLayout(getLocalBounds().toFloat());
-
-    FFT.setBounds(area.removeFromTop(100));
-    */
 }
 
 
@@ -313,6 +267,24 @@ void ClarityPlugin3AudioProcessorEditor::initialize_FFT()
     addAndMakeVisible(FFT);
 }
 
+void ClarityPlugin3AudioProcessorEditor::initialize_grapher()
+{
+    auto area = getLocalBounds();
+
+    // Oscilloscopes
+    addAndMakeVisible(ClarityPlugin3AudioPluginProcessor::grapher1);
+    grapher1.setTraceColour(juce::Colours::white);
+    grapher1.setBackgroundColour(juce::Colours::black);
+    grapher1.setBounds(area.removeFromTop(area.getHeight() / 4));
+
+    addAndMakeVisible(grapher2);
+    grapher2.setTraceColour(juce::Colours::black);
+    grapher2.setBackgroundColour(juce::Colours::white);
+    grapher2.setBounds(area.removeFromTop(area.getHeight() / 4));
+
+}
+
+
 void ClarityPlugin3AudioProcessorEditor::initialize_lowPassLabel()
 {
     addAndMakeVisible(lowPassLabel);
@@ -354,4 +326,11 @@ void ClarityPlugin3AudioProcessorEditor::initialize_highPass()
     highPass.setColour(juce::Slider::thumbColourId, juce::Colour::fromRGB(96, 45, 50));
     highPass.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 50);
     highPass.onValueChange = [this] { highPass_SliderValueChanged(); };
+}
+
+
+void ClarityPlugin3AudioProcessorEditor::getGrapher() 
+{
+
+
 }

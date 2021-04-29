@@ -41,6 +41,11 @@ public:
     void initialize_filterToggle();
 
     void initialize_FFT();
+
+    // Grapher stuff
+    void initialize_grapher();
+    void getGrapher();
+
     void initialize_lowPassLabel();
     void initialize_lowPass();
     void initialize_highPassLabel();
@@ -89,9 +94,9 @@ private:
     DeviceManager theDeviceManager;
 
     // Oscilloscopes
-    drow::AudioOscilloscope grapher1;
-    drow::AudioOscilloscope grapher2;
-    float* cache1;
+    /*drow::AudioOscilloscope grapher1;
+    drow::AudioOscilloscope grapher2;*/
+    
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(ClarityPlugin3AudioProcessorEditor)
 };

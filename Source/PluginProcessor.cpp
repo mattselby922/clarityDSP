@@ -42,7 +42,6 @@ ClarityPlugin3AudioProcessor::ClarityPlugin3AudioProcessor()
         juce::NormalisableRange<float>(20.0f, 20000.0f), 20000.0f, nullptr, nullptr);
     tree.createAndAddParameter("highPassFrequency", "HighPassFrequency", "highPassFrequency",
         juce::NormalisableRange<float>(20.0f, 20000.0f), 20.0f, nullptr, nullptr);
-
     tree.createAndAddParameter("compressorId", "compressor", "compressor",
         juce::NormalisableRange<float>(0.0f, 100.0f), 20.0f, nullptr, nullptr);
 
@@ -52,6 +51,8 @@ ClarityPlugin3AudioProcessor::ClarityPlugin3AudioProcessor()
 
     //SMA
     cache1 = createCache(SMA_AVERAGE);
+    cache2 = createCache(SMA_AVERAGE);
+
 
 
 }
@@ -152,7 +153,10 @@ void ClarityPlugin3AudioProcessor::releaseResources()
    // restarted due to a setting change.
 
    // For more details, see the help for AudioProcessor::releaseResources()
+
+   // the following line was causing crashes on program close -Matt (appears to be fixed)
     free(cache1);
+    free(cache2);
 }
 
 #ifndef JucePlugin_PreferredChannelConfigurations
@@ -206,16 +210,20 @@ void ClarityPlugin3AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer
 
     // I got rid of this outer loop, because I had to grab left and right channels at the same time (Liam)
 
-    // for (int channel = 0; channel < totalNumInputChannels; ++channel)
-    //{
+    auto* inBuffer = buffer.getReadPointer(0);
+    grapher1.processBlock(inBuffer, buffer.getNumSamples());
 
+    for (int channel = 0; channel < totalNumInputChannels; ++channel)
+    {
 
+    
     // left channel
-    auto* channelLeft = buffer.getWritePointer(0);
+    //auto* channelLeft = buffer.getWritePointer(0);
 
     // right channel
-    auto* channelRight = buffer.getWritePointer(1);
+    //auto* channelRight = buffer.getWritePointer(1);
 
+  
 
     //auto* inBuffer = buffer.getReadPointer(0, buffer.);
     
@@ -239,11 +247,7 @@ void ClarityPlugin3AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer
     float whiteNoise = sin(0.05 * pi);       // Increasing amplitude (multiplying by .05 and pi) and taking sine
     
     // need desired signal - white noise
-    
-                                                            
-    
-
-
+                                                                
 
     //processing
     
@@ -254,13 +258,16 @@ void ClarityPlugin3AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer
     
     /*if (whichFilter == 0) 
     {*/
-    grapher1.processBlock(channelLeft, buffer.getNumSamples());
-
+   
+    auto* inBuffer = buffer.getReadPointer(channel);
+    auto* outBuffer = buffer.getWritePointer(channel);
 
         for (int sample = 0; sample < buffer.getNumSamples(); sample++)
         {
             
-            // Gain Smoothing (formula: x = x-z * (x-y) / x=smoothed value, y= target value, z= speed.
+            // Original processing (using channelLeft & channelRight)
+            
+            /*// Gain Smoothing (formula: x = x-z * (x-y) / x=smoothed value, y= target value, z= speed.
             mGainSmoothed = mGainSmoothed - 0.001 * (mGainSmoothed - mGainParameter->get());
 
             channelLeft[sample] *= mGainSmoothed;
@@ -271,11 +278,25 @@ void ClarityPlugin3AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer
 
             channelLeft[sample] = simpleMovingAverage(SMA_AVERAGE, channelLeft[sample], cache1);
             channelRight[sample] = simpleMovingAverage(SMA_AVERAGE, channelRight[sample], cache1);
+            */
+            
+            // New processing (using inBuffer)
+            // Gain Smoothing (formula: x = x-z * (x-y) / x=smoothed value, y= target value, z= speed.
+            mGainSmoothed = mGainSmoothed - 0.001 * (mGainSmoothed - mGainParameter->get());
+            outBuffer[sample] *= mGainSmoothed;
 
+            if (channel == 0)
+            {
+                outBuffer[sample] = simpleMovingAverage1(SMA_AVERAGE, inBuffer[sample], cache1);
+            }
+            else if (channel == 1)
+            {
+                outBuffer[sample] = simpleMovingAverage2(SMA_AVERAGE, inBuffer[sample], cache2);
+            }
 
-            grapher2.processBlock(channelLeft, buffer.getNumSamples());
         }
-    
+        auto* inBuffer2 = buffer.getReadPointer(channel);
+        grapher2.processBlock(inBuffer2, buffer.getNumSamples());
 
     // If user has selected LMS Noise Suppression:
     /*else if (whichFilter == 1)
@@ -290,23 +311,19 @@ void ClarityPlugin3AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer
 
             DBG(*mGainParameter);
 
-*/
-            /*
-                IIR Filter
-            */
-
-
+          
+           //     IIR Filter
+           
 
             // filter the audio, storing it as filterOutput, which is then utilized in LMS algorithm to determine coefficients
 
-            /*
-                LMS
-            */
-
+           
+           //     LMS
+           
 
             // Convolution
             // weightVector[sample] are the weights to be changed, initialized 0, and channelLeft[sample] is the data vector
-            // filterOutput += (weightVector[sample] * channelLeft[sample]);
+             filterOutput += (weights[sample] * channelLeft[sample]);
 
 
 
@@ -316,7 +333,7 @@ void ClarityPlugin3AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer
             // Estimate of Mean Squared Error (error**2)(n)
             //MSE = MSE + abs(MSE ** 2);
 
-    /*
+  
             // X[] is input buffer
             // Weights are adjusted so that Mean Squared Error function is minimized
             // We don't fully understand the application of the Mean Squared Error risk function
@@ -324,10 +341,8 @@ void ClarityPlugin3AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer
             {
                 //weights[i] = weights[i] + (mu * error * X[i]);
             }
-
-
         }
-    }*/
+    //}*/
 
 
     //Low Pass Filter
@@ -337,7 +352,7 @@ void ClarityPlugin3AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer
     highPassFilter.process(juce::dsp::ProcessContextReplacing <float>(block));
     //compressor.process(juce::dsp::ProcessContextReplacing<float>(block));
 
-    //}   dont touch! outer loop closing bracket (Liam)
+    }   //dont touch! outer loop closing bracket (Liam)
 
 }
 
@@ -393,7 +408,33 @@ float* ClarityPlugin3AudioProcessor::createCache(int period)
     return (float*)malloc(sizeof(float) * period);
 }
 
-float ClarityPlugin3AudioProcessor::simpleMovingAverage(int period, float dataPoint, float* cache)
+float ClarityPlugin3AudioProcessor::simpleMovingAverage1(int period, float dataPoint, float* cache)
+{
+    static int count = 0;
+    float accumulator = 0;
+    if (count >= SMA_AVERAGE)
+    {
+        for (int i = 0; i < period - 1; i++)
+        {
+            cache[i] = cache[i + 1];
+        }
+        cache[period - 1] = dataPoint;
+
+        for (int i = 0; i < period; i++)
+        {
+            accumulator += *(cache + i);
+        }
+        return accumulator / period;
+    }
+    else
+    {
+        *(cache + count) = dataPoint;
+        count++;
+        return dataPoint;
+    }
+}
+
+float ClarityPlugin3AudioProcessor::simpleMovingAverage2(int period, float dataPoint, float* cache)
 {
     static int count = 0;
     float accumulator = 0;

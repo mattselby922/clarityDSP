@@ -52,16 +52,27 @@ public:
 
     // SMA Algorithm
     float* createCache(int period); // Make sure allocate and free cache for SMA
-    float simpleMovingAverage(int period, float dataPoint, float* cache);
+    float simpleMovingAverage1(int period, float dataPoint, float* cache);
+    float simpleMovingAverage2(int period, float dataPoint, float* cache);
 
 
     //initialize IIRFilter function
-    float* IIRFilter(float*);
+    //float* IIRFilter(float*);
 
     //LMS function
-    void LMS();
+    //void LMS();
 
     juce::AudioProcessorValueTreeState tree;
+
+
+    // SMA
+    drow::AudioOscilloscope grapher1;
+    drow::AudioOscilloscope grapher2;
+    float* cache1;
+    float* cache2;
+
+
+    void getGrapher(drow::AudioOscilloscope grapher1, drow::AudioOscilloscope grapher2, float* cache1, float* cache2);
 
 private:
     // Defining AudioProcessorFloat of Gain
@@ -75,14 +86,10 @@ private:
     juce::AudioParameterFloat* lowPassFrequencyParameter;
     juce::AudioParameterFloat* highPassFrequencyParameter;
 
-    
+
     // intitializing dsp::ProcessSpec for filters
     double lastSampleRate;
 
-    // SMA
-    drow::AudioOscilloscope grapher1;
-    drow::AudioOscilloscope grapher2;
-    float* cache1;
 
     // duplicated to analyze in stereo
     juce::dsp::ProcessorDuplicator<juce::dsp::IIR::Filter <float>, juce::dsp::IIR::Coefficients <float>> lowPassFilter;

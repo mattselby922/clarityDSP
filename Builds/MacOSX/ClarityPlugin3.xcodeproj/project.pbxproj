@@ -428,6 +428,13 @@
 			path = "~/JUCE/modules/juce_audio_utils";
 			sourceTree = "<absolute>";
 		};
+		879F2360F4DF64BC874C455A = {
+			isa = PBXFileReference;
+			lastKnownFileType = file;
+			name = dRowAudio;
+			path = ../../JuceLibraryCode/modules/dRowAudio;
+			sourceTree = "SOURCE_ROOT";
+		};
 		885BB1AB1656F7815F2CB54B = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
@@ -475,13 +482,6 @@
 			lastKnownFileType = file;
 			name = "juce_gui_basics";
 			path = "~/JUCE/modules/juce_gui_basics";
-			sourceTree = "<absolute>";
-		};
-		99D51A8B1AF1BD8DD068C36E = {
-			isa = PBXFileReference;
-			lastKnownFileType = file;
-			name = dRowAudio;
-			path = "G:/JUCE/JUCE/modules/drowaudio-master/module/dRowAudio";
 			sourceTree = "<absolute>";
 		};
 		9A9307E017E3EA3252419234 = {
@@ -656,7 +656,7 @@
 		54F4EAFE7934C01975F8A9E3 = {
 			isa = PBXGroup;
 			children = (
-				99D51A8B1AF1BD8DD068C36E,
+				879F2360F4DF64BC874C455A,
 				AF9E05F3A97F69CFE70823AD,
 				2EAF15515A503C8634D0AD76,
 				2ADF6A2FA3815D32A22CFCEC,
@@ -901,7 +901,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
 					"$(SRCROOT)/../../JuceLibraryCode",
-					"G:/JUCE/JUCE/modules/drowaudio-master/module",
+					"$(SRCROOT)/../../JuceLibraryCode/modules",
 					"$(SRCROOT)/~/JUCE/modules",
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_plugin_client",
 					"$(inherited)",
@@ -914,7 +914,7 @@
 				MTL_HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
 					"$(SRCROOT)/../../JuceLibraryCode",
-					"G:/JUCE/JUCE/modules/drowaudio-master/module",
+					"$(SRCROOT)/../../JuceLibraryCode/modules",
 					"$(SRCROOT)/~/JUCE/modules",
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_plugin_client",
 				);
@@ -1024,7 +1024,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
 					"$(SRCROOT)/../../JuceLibraryCode",
-					"G:/JUCE/JUCE/modules/drowaudio-master/module",
+					"$(SRCROOT)/../../JuceLibraryCode/modules",
 					"$(SRCROOT)/~/JUCE/modules",
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_plugin_client",
 					"$(inherited)",
@@ -1038,7 +1038,7 @@
 				MTL_HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
 					"$(SRCROOT)/../../JuceLibraryCode",
-					"G:/JUCE/JUCE/modules/drowaudio-master/module",
+					"$(SRCROOT)/../../JuceLibraryCode/modules",
 					"$(SRCROOT)/~/JUCE/modules",
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_plugin_client",
 				);
@@ -1148,7 +1148,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
 					"$(SRCROOT)/../../JuceLibraryCode",
-					"G:/JUCE/JUCE/modules/drowaudio-master/module",
+					"$(SRCROOT)/../../JuceLibraryCode/modules",
 					"$(SRCROOT)/~/JUCE/modules",
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_plugin_client",
 					"$(inherited)",
@@ -1161,7 +1161,7 @@
 				MTL_HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
 					"$(SRCROOT)/../../JuceLibraryCode",
-					"G:/JUCE/JUCE/modules/drowaudio-master/module",
+					"$(SRCROOT)/../../JuceLibraryCode/modules",
 					"$(SRCROOT)/~/JUCE/modules",
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_plugin_client",
 				);
@@ -1272,7 +1272,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
 					"$(SRCROOT)/../../JuceLibraryCode",
-					"G:/JUCE/JUCE/modules/drowaudio-master/module",
+					"$(SRCROOT)/../../JuceLibraryCode/modules",
 					"$(SRCROOT)/~/JUCE/modules",
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_plugin_client",
 					"$(inherited)",
@@ -1286,7 +1286,7 @@
 				MTL_HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
 					"$(SRCROOT)/../../JuceLibraryCode",
-					"G:/JUCE/JUCE/modules/drowaudio-master/module",
+					"$(SRCROOT)/../../JuceLibraryCode/modules",
 					"$(SRCROOT)/~/JUCE/modules",
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_plugin_client",
 				);
@@ -1394,7 +1394,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
 					"$(SRCROOT)/../../JuceLibraryCode",
-					"G:/JUCE/JUCE/modules/drowaudio-master/module",
+					"$(SRCROOT)/../../JuceLibraryCode/modules",
 					"$(SRCROOT)/~/JUCE/modules",
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_plugin_client",
 					"$(inherited)",
@@ -1405,7 +1405,7 @@
 				MTL_HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
 					"$(SRCROOT)/../../JuceLibraryCode",
-					"G:/JUCE/JUCE/modules/drowaudio-master/module",
+					"$(SRCROOT)/../../JuceLibraryCode/modules",
 					"$(SRCROOT)/~/JUCE/modules",
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_plugin_client",
 				);
@@ -1511,7 +1511,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
 					"$(SRCROOT)/../../JuceLibraryCode",
-					"G:/JUCE/JUCE/modules/drowaudio-master/module",
+					"$(SRCROOT)/../../JuceLibraryCode/modules",
 					"$(SRCROOT)/~/JUCE/modules",
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_plugin_client",
 					"$(inherited)",
@@ -1523,7 +1523,7 @@
 				MTL_HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
 					"$(SRCROOT)/../../JuceLibraryCode",
-					"G:/JUCE/JUCE/modules/drowaudio-master/module",
+					"$(SRCROOT)/../../JuceLibraryCode/modules",
 					"$(SRCROOT)/~/JUCE/modules",
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_plugin_client",
 				);
@@ -1630,7 +1630,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
 					"$(SRCROOT)/../../JuceLibraryCode",
-					"G:/JUCE/JUCE/modules/drowaudio-master/module",
+					"$(SRCROOT)/../../JuceLibraryCode/modules",
 					"$(SRCROOT)/~/JUCE/modules",
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_plugin_client",
 					"$(inherited)",
@@ -1640,7 +1640,7 @@
 				MTL_HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
 					"$(SRCROOT)/../../JuceLibraryCode",
-					"G:/JUCE/JUCE/modules/drowaudio-master/module",
+					"$(SRCROOT)/../../JuceLibraryCode/modules",
 					"$(SRCROOT)/~/JUCE/modules",
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_plugin_client",
 				);
@@ -1747,7 +1747,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
 					"$(SRCROOT)/../../JuceLibraryCode",
-					"G:/JUCE/JUCE/modules/drowaudio-master/module",
+					"$(SRCROOT)/../../JuceLibraryCode/modules",
 					"$(SRCROOT)/~/JUCE/modules",
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_plugin_client",
 					"$(inherited)",
@@ -1758,7 +1758,7 @@
 				MTL_HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
 					"$(SRCROOT)/../../JuceLibraryCode",
-					"G:/JUCE/JUCE/modules/drowaudio-master/module",
+					"$(SRCROOT)/../../JuceLibraryCode/modules",
 					"$(SRCROOT)/~/JUCE/modules",
 					"$(SRCROOT)/~/JUCE/modules/juce_audio_plugin_client",
 				);
