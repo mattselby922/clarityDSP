@@ -36,6 +36,8 @@ public:
         }
     }
 
+   
+
     //==============================================================================
     void paint(juce::Graphics& g) override
     {
@@ -116,7 +118,7 @@ public:
     {
         fftOrder = 11,             // [1]
         fftSize = 1 << fftOrder,  // [2]
-        scopeSize = 512             // [3]
+        scopeSize = 200             // [3]
     };
 
 private:

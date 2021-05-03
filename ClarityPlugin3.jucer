@@ -17,7 +17,8 @@
       <FILE id="tUPV0y" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
     </GROUP>
   </MAINGROUP>
-  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"
+               DROWAUDIO_USE_FFTREAL="1" DROWAUDIO_USE_CURL="1"/>
   <EXPORTFORMATS>
     <VS2019 targetFolder="Builds/VisualStudio2019">
       <CONFIGURATIONS>
@@ -38,7 +39,7 @@
         <MODULEPATH id="juce_graphics" path="G:/JUCE/JUCE/modules"/>
         <MODULEPATH id="juce_gui_basics" path="G:/JUCE/JUCE/modules"/>
         <MODULEPATH id="juce_gui_extra" path="G:/JUCE/JUCE/modules"/>
-        <MODULEPATH id="dRowAudio" path="..\drowaudio"/>
+        <MODULEPATH id="dRowAudio" path="JuceLibraryCode\modules\dRowAudio"/>
         <MODULEPATH id="juce_cryptography" path="G:/JUCE/JUCE/modules"/>
       </MODULEPATHS>
     </VS2019>

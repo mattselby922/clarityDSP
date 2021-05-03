@@ -22,7 +22,8 @@ ClarityPlugin3AudioProcessorEditor::ClarityPlugin3AudioProcessorEditor(ClarityPl
     initialize_filterToggle();
 
     //initialize_FFT();
-    initialize_grapher();
+    //initialize_grapher();
+    initialize_analyser();
 
     // Filters
     initialize_lowPassLabel();
@@ -33,12 +34,6 @@ ClarityPlugin3AudioProcessorEditor::ClarityPlugin3AudioProcessorEditor(ClarityPl
     // Temp Device Manager Initialization
     addAndMakeVisible(theDeviceManager);
     
-    
- 
-    //grapher2.setVerticalZoom(2.0);
-   // grapher2.setHorizontalZoom(0.01);
-
-
     
 }
 
@@ -54,6 +49,7 @@ void ClarityPlugin3AudioProcessorEditor::paint(juce::Graphics& g)
     g.setGradientFill(juce::ColourGradient(juce::Colours::lightcoral, 0, 0, juce::Colours::darkcyan, 1000, 1000, true));
     g.fillAll();
     g.setFont(15.0f);
+  
 }
 
 void ClarityPlugin3AudioProcessorEditor::resized()
@@ -72,10 +68,27 @@ void ClarityPlugin3AudioProcessorEditor::resized()
 
     // SimpleFFT (i.e., Spectrogram)
     //FFT.setBounds(area.removeFromTop(area.getHeight() / 3));
-
     
+    
+    // Oscilloscopes
+    
+    //grapher1.setTraceColour();
+    //grapher1.setBackgroundColour(juce::Colours::black);
+    /*grapher1.drow::AudioOscilloscope::setBounds(area.removeFromTop(area.getHeight() / 4));
+    grapher1.drow::AudioOscilloscope::setVerticalZoom(1.0);
+    grapher1.drow::AudioOscilloscope::setHorizontalZoom(0.01);
+    grapher1.drow::AudioOscilloscope::setTraceColour(drow::Colours::black);
+    grapher1.drow::AudioOscilloscope::setBackgroundColour(drow::Colours::beige);
+
+    grapher2.drow::AudioOscilloscope::setTraceColour(drow::Colours::black);
+    grapher2.drow::AudioOscilloscope::setBackgroundColour(drow::Colours::beige);
+    grapher2.setBounds(area.removeFromTop(area.getHeight() / 4));
+    grapher2.setVerticalZoom(1.0);
+    grapher2.setHorizontalZoom(0.01);*/
 
     area.removeFromTop(100); // Temporary Spacing
+    //analyser.setBounds(area.removeFromTop(area.getHeight() / 3));
+    analyser.setBounds(area.removeFromBottom(area.getHeight() / 3));
 
     // muteButton
     //muteButton.setBounds(area.removeFromLeft(area.getWidth() / 5));
@@ -98,9 +111,8 @@ void ClarityPlugin3AudioProcessorEditor::resized()
 
     // highPass
     highPass.setBounds(area);
-
+  
 }
-
 
 
 void ClarityPlugin3AudioProcessorEditor::muteButtonClicked()
@@ -267,22 +279,15 @@ void ClarityPlugin3AudioProcessorEditor::initialize_FFT()
     addAndMakeVisible(FFT);
 }
 
+void ClarityPlugin3AudioProcessorEditor::initialize_analyser()
+{
+    addAndMakeVisible(analyser); 
+}
+
 void ClarityPlugin3AudioProcessorEditor::initialize_grapher()
 {
-    auto area = getLocalBounds();
-
-    // Oscilloscopes
     addAndMakeVisible(ClarityPlugin3AudioProcessor::grapher1);
-    grapher1.setTraceColour(juce::Colours::white);
-    grapher1.setBackgroundColour(juce::Colours::black);
-    grapher1.setBounds(area.removeFromTop(area.getHeight() / 4));
-
     addAndMakeVisible(ClarityPlugin3AudioProcessor::grapher2);
-    grapher2.setTraceColour(juce::Colours::white);
-    grapher2.setBackgroundColour(juce::Colours::black);
-    grapher2.setBounds(area.removeFromTop(area.getHeight() / 4));
-
-
 }
 
 
@@ -327,11 +332,4 @@ void ClarityPlugin3AudioProcessorEditor::initialize_highPass()
     highPass.setColour(juce::Slider::thumbColourId, juce::Colour::fromRGB(96, 45, 50));
     highPass.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 50);
     highPass.onValueChange = [this] { highPass_SliderValueChanged(); };
-}
-
-
-void ClarityPlugin3AudioProcessorEditor::getGrapher() 
-{
-
-
 }

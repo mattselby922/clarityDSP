@@ -24,6 +24,7 @@ public:
    #endif
 
     void processBlock (juce::AudioBuffer<float>&, juce::MidiBuffer&) override;
+    //void getNextAudioBlock(juce::AudioSource::AudioSourceChannelInfo& bufferToFill);
 
     //==============================================================================
     juce::AudioProcessorEditor* createEditor() override;

@@ -185,7 +185,12 @@ bool ClarityPlugin3AudioProcessor::isBusesLayoutSupported(const BusesLayout& lay
 }
 #endif
 
+// attempting to move analyser code into this file
+
+
+
 void ClarityPlugin3AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
+//void getNextAudioBlock(const juce::AudioSourceChannelInfo& bufferToFill)
 {
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels = getTotalNumInputChannels();
@@ -210,81 +215,90 @@ void ClarityPlugin3AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer
 
     // I got rid of this outer loop, because I had to grab left and right channels at the same time (Liam)
 
-    auto* inBuffer = buffer.getReadPointer(0);
-    grapher1.processBlock(inBuffer, buffer.getNumSamples());
+    //auto* inBuffer = buffer.getReadPointer(0);
+   
 
-    for (int channel = 0; channel < totalNumInputChannels; ++channel)
-    {
+    //for (int channel = 0; channel < totalNumInputChannels; channel++)
+    //{
 
-    
-    // left channel
-    //auto* channelLeft = buffer.getWritePointer(0);
+        // left channel
+        auto* channelLeft = buffer.getWritePointer(0);
 
-    // right channel
-    //auto* channelRight = buffer.getWritePointer(1);
-
-  
-
-    //auto* inBuffer = buffer.getReadPointer(0, buffer.);
+        // right channel
+        auto* channelRight = buffer.getWritePointer(1);
     
     
-    // variables for LMS and IIR
-    float error;        // DesiredSignal - filterOutput (this is fed into LMS algorithm to improve it over time)
-    float filterOutput; // Fed into LMS
+        // variables for LMS and IIR
+        /*float error;        // DesiredSignal - filterOutput (this is fed into LMS algorithm to improve it over time)
+        float filterOutput; // Fed into LMS
     
-    float r = (buffer.getNumSamples() * 100) / 10000;        // # of runs (used for Error Performance)
+        float r = (buffer.getNumSamples() * 100) / 10000;        // # of runs (used for Error Performance)
 
-    double pi = 2 * acos(0.0);
+        double pi = 2 * acos(0.0);
 
-    int filterOrder = 5;                    // Order of filter (number of weights/coefficients)
+        int filterOrder = 5;                    // Order of filter (number of weights/coefficients)
     
-    double mu = 0.25;                       // CONVERGENCE RATE [This value will be changed for efficiency testing purposes]
-                                            // If mu is too large, error estimation won't be right, might never converge to local minimum
+        double mu = 0.25;                       // CONVERGENCE RATE [This value will be changed for efficiency testing purposes]
+                                                // If mu is too large, error estimation won't be right, might never converge to local minimum
 
-    float weights[] = { 0, 0, 0, 0, 0};     //Create array with filterOrder elements (initialized to 0)
+        float weights[] = { 0, 0, 0, 0, 0};     //Create array with filterOrder elements (initialized to 0)
     
-    // Desired signal will be actual signal - sine wave (sine wave represents white noise)
-    float whiteNoise = sin(0.05 * pi);       // Increasing amplitude (multiplying by .05 and pi) and taking sine
-    
-    // need desired signal - white noise
+        // Desired signal will be actual signal - sine wave (sine wave represents white noise)
+        float whiteNoise = sin(0.05 * pi);       // Increasing amplitude (multiplying by .05 and pi) and taking sine
+        */
+        // need desired signal - white noise
                                                                 
 
-    //processing
+        //processing
     
-    // get value of filterToggle here
+        // get value of filterToggle here
 
 
-    // If user has selected SMA Noise Suppression:
+        // If user has selected SMA Noise Suppression:
     
-    /*if (whichFilter == 0) 
-    {*/
+        /*if (whichFilter == 0) 
+        {*/
    
-    auto* inBuffer = buffer.getReadPointer(channel);
-    auto* outBuffer = buffer.getWritePointer(channel);
-    //DBG(totalNumInputChannels);
+        
+        //auto* inBuffer = buffer.getWritePointer(channel);
+        //auto* outBuffer = buffer.getWritePointer(channel);
 
-        for (int sample = 0; sample < buffer.getNumSamples(); sample++)
+        // Draw unprocessed audio in grapher1
+        //grapher1.processBlock(inBuffer, buffer.getNumSamples());
+
+        DBG(totalNumInputChannels);
+
+        for (int sample = 0; sample < buffer.getNumSamples(); ++sample)
         {
             
             // Original processing (using channelLeft & channelRight)
             
-            /*// Gain Smoothing (formula: x = x-z * (x-y) / x=smoothed value, y= target value, z= speed.
+            // Gain Smoothing (formula: x = x-z * (x-y) / x=smoothed value, y= target value, z= speed.
             mGainSmoothed = mGainSmoothed - 0.001 * (mGainSmoothed - mGainParameter->get());
 
             channelLeft[sample] *= mGainSmoothed;
             channelRight[sample] *= mGainSmoothed;
 
-            DBG(*mGainParameter);
+            //pushNextSampleIntoFifo(channelLeft[sample]);
+            grapher1.drow::AudioOscilloscope::processBlock(channelLeft, buffer.getNumSamples());
 
-
-            channelLeft[sample] = simpleMovingAverage(SMA_AVERAGE, channelLeft[sample], cache1);
-            channelRight[sample] = simpleMovingAverage(SMA_AVERAGE, channelRight[sample], cache1);
-            */
+            channelLeft[sample] = simpleMovingAverage1(SMA_AVERAGE, channelLeft[sample], cache1);
+            channelRight[sample] = simpleMovingAverage2(SMA_AVERAGE, channelRight[sample], cache2);
             
+            grapher2.drow::AudioOscilloscope::processBlock(channelLeft, buffer.getNumSamples());
+            
+            
+            // Output buffer values (samples) to console 
+            // ONLY USE FOR INFORMATION PURPOSES; WILL CAUSE AUDIO STUTTERING
+            std::cout << channelLeft[sample] << std::endl;
+
+
             // New processing (using inBuffer)
             // Gain Smoothing (formula: x = x-z * (x-y) / x=smoothed value, y= target value, z= speed.
-            mGainSmoothed = mGainSmoothed - 0.001 * (mGainSmoothed - mGainParameter->get());
+            /*mGainSmoothed = mGainSmoothed - 0.001 * (mGainSmoothed - mGainParameter->get());
             outBuffer[sample] *= mGainSmoothed;
+            DBG(*mGainParameter);
+            grapher1.drow::AudioOscilloscope::processBlock(inBuffer, buffer.getNumSamples());
 
             if (channel == 0)
             {
@@ -295,66 +309,68 @@ void ClarityPlugin3AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer
                 outBuffer[sample] = simpleMovingAverage2(SMA_AVERAGE, inBuffer[sample], cache2);
             }
 
-        }
-        auto* inBuffer2 = buffer.getReadPointer(channel);
-        grapher2.processBlock(inBuffer2, buffer.getNumSamples());
+            auto* inBuffer2 = buffer.getReadPointer(channel);
+            // Draw processed audio in grapher2
+            grapher2.drow::AudioOscilloscope::processBlock(inBuffer2, buffer.getNumSamples());*/
+            
 
-    // If user has selected LMS Noise Suppression:
-    /*else if (whichFilter == 1)
-    {
-        for (int sample = 0; sample < buffer.getNumSamples(); sample++)
+        }   // end iteration over the samples
+        
+        
+        // If user has selected LMS Noise Suppression:
+        /*else if (whichFilter == 1)
         {
-            // Gain Smoothing (formula: x = x-z * (x-y) / x=smoothed value, y= target value, z= speed.
-            mGainSmoothed = mGainSmoothed - 0.001 * (mGainSmoothed - mGainParameter->get());
+            for (int sample = 0; sample < buffer.getNumSamples(); sample++)
+            {
+                // Gain Smoothing (formula: x = x-z * (x-y) / x=smoothed value, y= target value, z= speed.
+                mGainSmoothed = mGainSmoothed - 0.001 * (mGainSmoothed - mGainParameter->get());
 
-            channelLeft[sample] *= mGainSmoothed;
-            channelRight[sample] *= mGainSmoothed;
+                channelLeft[sample] *= mGainSmoothed;
+                channelRight[sample] *= mGainSmoothed;
 
-            DBG(*mGainParameter);
+                DBG(*mGainParameter);
 
           
-           //     IIR Filter
+               //     IIR Filter
            
 
-            // filter the audio, storing it as filterOutput, which is then utilized in LMS algorithm to determine coefficients
+                // filter the audio, storing it as filterOutput, which is then utilized in LMS algorithm to determine coefficients
 
            
-           //     LMS
+               //     LMS
            
 
-            // Convolution
-            // weightVector[sample] are the weights to be changed, initialized 0, and channelLeft[sample] is the data vector
-             filterOutput += (weights[sample] * channelLeft[sample]);
+                // Convolution
+                // weightVector[sample] are the weights to be changed, initialized 0, and channelLeft[sample] is the data vector
+                 filterOutput += (weights[sample] * channelLeft[sample]);
 
 
 
-            // Calculate Error (Difference b/w desired signal d(n) and filters output y(n)
-            //error = desiredSignal - filterOutput;
+                // Calculate Error (Difference b/w desired signal d(n) and filters output y(n)
+                //error = desiredSignal - filterOutput;
 
-            // Estimate of Mean Squared Error (error**2)(n)
-            //MSE = MSE + abs(MSE ** 2);
+                // Estimate of Mean Squared Error (error**2)(n)
+                //MSE = MSE + abs(MSE ** 2);
 
   
-            // X[] is input buffer
-            // Weights are adjusted so that Mean Squared Error function is minimized
-            // We don't fully understand the application of the Mean Squared Error risk function
-            for (int i = 0; i < filterOrder; i++)
-            {
-                //weights[i] = weights[i] + (mu * error * X[i]);
+                // X[] is input buffer
+                // Weights are adjusted so that Mean Squared Error function is minimized
+                // We don't fully understand the application of the Mean Squared Error risk function
+                for (int i = 0; i < filterOrder; i++)
+                {
+                    //weights[i] = weights[i] + (mu * error * X[i]);
+                }
             }
-        }
-    //}*/
+        //}*/
+   
 
-
-    //Low Pass Filter
-    juce::dsp::AudioBlock<float> block(buffer);
-    updateFilter();
-    lowPassFilter.process(juce::dsp::ProcessContextReplacing <float>(block));
-    highPassFilter.process(juce::dsp::ProcessContextReplacing <float>(block));
-    //compressor.process(juce::dsp::ProcessContextReplacing<float>(block));
-
-    }   //dont touch! outer loop closing bracket (Liam)
-
+        //Low Pass Filter
+        juce::dsp::AudioBlock<float> block(buffer);
+        updateFilter();
+        lowPassFilter.process(juce::dsp::ProcessContextReplacing <float>(block));
+        highPassFilter.process(juce::dsp::ProcessContextReplacing <float>(block));
+        //compressor.process(juce::dsp::ProcessContextReplacing<float>(block));
+     //}//dont touch! outer loop closing bracket (Liam)
 }
 
 //==============================================================================
